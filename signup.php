@@ -76,22 +76,22 @@ mysqli_free_result($state_set);
                                         <form method="post" action="signup.php">
                                             <div class="row 50%">
                                                 <div class="6u 12u(mobile)">
-                                                    <input type="text" name="firstname" id="signup-name" placeholder="First Name" />
+                                                    <input type="text" name="firstname" id="signup-name" placeholder="First Name" value="<?php echo h($signup['firstname']); ?>" />
                                                 </div>
                                                 <div class="6u 12u(mobile)">
-                                                    <input type="text" name="lastname" id="signup-name" placeholder="Last Name" />
+                                                    <input type="text" name="lastname" id="signup-name" placeholder="Last Name" value="<?php echo h($signup['lastname']); ?>"/>
                                                 </div>
                                                 <div class="12u 12u(mobile)">
-                                                    <input type="text" name="username" id="signup-username" placeholder="Username" />
+                                                    <input type="text" name="username" id="signup-username" placeholder="Username" value="<?php echo h($signup['username']); ?>"/>
                                                 </div>
                                                 <div class="12u 12u(mobile)">
-                                                    <input type="text" name="email" id="signup-email" placeholder="E-mail Address" />
+                                                    <input type="text" name="email" id="signup-email" placeholder="E-mail Address" value="<?php echo h($signup['email']); ?>"/>
                                                 </div>
                                                 <div class="12u 12u(mobile)">
-                                                    <input type="text" name="address" id="signup-email" placeholder="Address" />
+                                                    <input type="text" name="address" id="signup-email" placeholder="Address" value="<?php echo h($signup['address']); ?>"/>
                                                 </div>
                                                 <div class="6u 12u(mobile)">
-                                                    <input type="text" name="city" id="signup-name" placeholder="City" />
+                                                    <input type="text" name="city" id="signup-name" placeholder="City" value="<?php echo h($signup['city']); ?>"/>
                                                 </div>
                                                 <div class="6u 12u(mobile)">
                                                     <select name="state">
@@ -105,7 +105,7 @@ mysqli_free_result($state_set);
                                                     </select>
                                                 </div>
                                                 <div class="12u 12u(mobile)">
-                                                    <input type="text" name="zipcode" id="signup-email" placeholder="Zipcode" />
+                                                    <input type="text" name="zipcode" id="signup-email" placeholder="Zipcode" value="<?php echo h($signup['zipcode']); ?>" />
                                                 </div>
                                                 <div class="6u 12u(mobile)">
                                                     <input type="text" name="password" id="signup-password" placeholder="Password" />
