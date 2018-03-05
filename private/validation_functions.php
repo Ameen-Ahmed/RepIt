@@ -18,8 +18,13 @@ function has_presence($value) {
 }
 
 function has_only_letters($value) {
-    $num_regex = '/[A-Za-z]{1,}/';
-    return preg_match($num_regex, $value) === 1;
+    $regex = '/[A-Za-z]{1,}/';
+    return preg_match($regex, $value) === 1;
+}
+
+function has_only_numbers($value) {
+    $regex = '/\d{1,}/';
+    return preg_match($regex, $value) === 1;
 }
 
 // has_length_greater_than('abcd', 3)
@@ -96,6 +101,16 @@ function has_string($value, $required_string) {
 function has_valid_email_format($email) {
     $email_regex = '/\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\Z/i';
     return preg_match($email_regex, $email) === 1;
+}
+
+function has_valid_address_format($address) {
+    $address_regex = '/^[0-9A-Za-z#.\s]{1,}$/';
+    return preg_match($address_regex, $address) === 1;
+}
+
+function has_valid_city_format($city) {
+    $city_regex = '/^[A-Za-z-\s]{1,}$/';
+    return preg_match($city_regex, $city) === 1;
 }
 
 function has_unique_user_name($username, $current_id="0") {
