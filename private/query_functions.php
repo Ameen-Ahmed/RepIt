@@ -81,7 +81,7 @@ function validate_signup($signup) {
     elseif(!has_length($signup['address'], ['min' => 4, 'max' => 55])) {
         $errors[] = "Address must be between 4 and 55 characters.";
     }
-    if(!has_valid_address_format($signup['address']) {
+    if(!has_valid_address_format($signup['address'])) {
         $errors[] = "Address may contain no symbols except # and . ";
     }
 
@@ -92,7 +92,7 @@ function validate_signup($signup) {
     elseif(!has_length($signup['city'], ['min' => 2, 'max' => 20])) {
         $errors[] = "City must be between 2 and 20 characters";
     }
-    if(!has_valid_address_format($signup['address']) {
+    if(!has_valid_city_format($signup['city'])) {
         $errors[] = "City may contain no symbols except - ";
     }
 
@@ -109,7 +109,7 @@ function validate_signup($signup) {
     elseif(!has_length($signup['zipcode'], ['exactly' => 5])) {
         $errors[] = "Zipcode must be exactly 5 characters.";
     }
-    if(!has_only_numbers){
+    if(!has_only_numbers($signup['zipcode'])){
         $errors[] = "Zipcodes may only have numbers.";
     }
 
