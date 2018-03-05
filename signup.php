@@ -26,7 +26,14 @@ if(is_post_request()) {
     }
 
 } else {
-
+    $signup['firstname'] = '';
+    $signup['lastname'] = '';
+    $signup['email'] = '';
+    $signup['username'] = '';
+    $signup['address'] = '';
+    $signup['state'] = '';
+    $signup['city'] = '';
+    $signup['zipcode'] = '';
 }
 
 $state_set = find_all_state_abrr();
