@@ -115,10 +115,10 @@ mysqli_free_result($state_set);
                                                     <input type="text" name="zipcode" id="signup-email" placeholder="Zipcode" value="<?php echo h($signup['zipcode']); ?>" />
                                                 </div>
                                                 <div class="6u 12u(mobile)">
-                                                    <input type="text" name="password" id="signup-password" placeholder="Password" />
+                                                    <input type="password" name="password" id="signup-password" placeholder="Password" />
                                                 </div>
                                                 <div class="6u 12u(mobile)">
-                                                    <input type="text" name="confirm_password" id="signup-pass-confirmation" placeholder="Confirm password" />
+                                                    <input type="password" name="confirm_password" id="signup-pass-confirmation" placeholder="Confirm password" />
                                                 </div>
                                             </div>
                                             <div class="row">
