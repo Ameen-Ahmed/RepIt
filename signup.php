@@ -77,7 +77,7 @@ mysqli_free_result($state_set);
                         <div id="footer" class="container">
                             <hr />
                             <div class="row 150%">
-                                <div class="6u 12u(mobile)">
+                                <div class="10u 12u(mobile)">
                                     <!-- Contact Form -->
                                     <section>
                                         <form method="post" action="signup.php">
