@@ -1,19 +1,19 @@
 <?php require_once("private/initialize.php");
 
 if(is_post_request()) {
-    $signup = [];
-    $signup['firstname'] = $_POST['firstname'] ?? '';
-    $signup['lastname'] = $_POST['lastname'] ?? '';
-    $signup['email'] = $_POST['email'] ?? '';
-    $signup['username'] = $_POST['username'] ?? '';
-    $signup['address'] = $_POST['address'] ?? '';
-    $signup['state'] = $_POST['state'] ?? '';
-    $signup['city'] = $_POST['city'] ?? '';
-    $signup['zipcode'] = $_POST['zipcode'] ?? '';
-    $signup['password'] = $_POST['password'] ?? '';
-    $signup['confirm_password'] = $_POST['confirm_password'] ?? '';
+    $user = [];
+    $user['firstname'] = $_POST['firstname'] ?? '';
+    $user['lastname'] = $_POST['lastname'] ?? '';
+    $user['email'] = $_POST['email'] ?? '';
+    $user['username'] = $_POST['username'] ?? '';
+    $user['address'] = $_POST['address'] ?? '';
+    $user['state'] = $_POST['state'] ?? '';
+    $user['city'] = $_POST['city'] ?? '';
+    $user['zipcode'] = $_POST['zipcode'] ?? '';
+    $user['password'] = $_POST['password'] ?? '';
+    $user['confirm_password'] = $_POST['confirm_password'] ?? '';
 
-    $result = insert_signup($signup);
+    $result = insert_user($user);
 
     if($result === true) {
         $new_id = mysqli_insert_id($db);
@@ -26,14 +26,14 @@ if(is_post_request()) {
     }
 
 } else {
-    $signup['firstname'] = '';
-    $signup['lastname'] = '';
-    $signup['email'] = '';
-    $signup['username'] = '';
-    $signup['address'] = '';
-    $signup['state'] = '';
-    $signup['city'] = '';
-    $signup['zipcode'] = '';
+    $user['firstname'] = '';
+    $user['lastname'] = '';
+    $user['email'] = '';
+    $user['username'] = '';
+    $user['address'] = '';
+    $user['state'] = '';
+    $user['city'] = '';
+    $user['zipcode'] = '';
 }
 
 $state_set = find_all_state_abrr();
@@ -69,22 +69,22 @@ $page_title = 'Sign Up';
                                     <form method="post" action="signup.php">
                                         <div class="row 50%">
                                             <div class="6u 12u(mobile)">
-                                                <input type="text" name="firstname" id="signup-name" placeholder="First Name" value="<?php echo h($signup['firstname']); ?>" />
+                                                <input type="text" name="firstname" id="signup-name" placeholder="First Name" value="<?php echo h($user['firstname']); ?>" />
                                             </div>
                                             <div class="6u 12u(mobile)">
-                                                <input type="text" name="lastname" id="signup-name" placeholder="Last Name" value="<?php echo h($signup['lastname']); ?>"/>
+                                                <input type="text" name="lastname" id="signup-name" placeholder="Last Name" value="<?php echo h($user['lastname']); ?>"/>
                                             </div>
                                             <div class="12u 12u(mobile)">
-                                                <input type="text" name="username" id="signup-username" placeholder="Username" value="<?php echo h($signup['username']); ?>"/>
+                                                <input type="text" name="username" id="signup-username" placeholder="Username" value="<?php echo h($user['username']); ?>"/>
                                             </div>
                                             <div class="12u 12u(mobile)">
-                                                <input type="text" name="email" id="signup-email" placeholder="E-mail Address" value="<?php echo h($signup['email']); ?>"/>
+                                                <input type="text" name="email" id="signup-email" placeholder="E-mail Address" value="<?php echo h($user['email']); ?>"/>
                                             </div>
                                             <div class="12u 12u(mobile)">
-                                                <input type="text" name="address" id="signup-email" placeholder="Address" value="<?php echo h($signup['address']); ?>"/>
+                                                <input type="text" name="address" id="signup-email" placeholder="Address" value="<?php echo h($user['address']); ?>"/>
                                             </div>
                                             <div class="6u 12u(mobile)">
-                                                <input type="text" name="city" id="signup-name" placeholder="City" value="<?php echo h($signup['city']); ?>"/>
+                                                <input type="text" name="city" id="signup-name" placeholder="City" value="<?php echo h($user['city']); ?>"/>
                                             </div>
                                             <div class="6u 12u(mobile)">
                                                 <select name="state">
@@ -98,7 +98,7 @@ $page_title = 'Sign Up';
                                                 </select>
                                             </div>
                                             <div class="12u 12u(mobile)">
-                                                <input type="text" name="zipcode" id="signup-email" placeholder="Zipcode" value="<?php echo h($signup['zipcode']); ?>" />
+                                                <input type="text" name="zipcode" id="signup-email" placeholder="Zipcode" value="<?php echo h($user['zipcode']); ?>" />
                                             </div>
                                             <div class="6u 12u(mobile)">
                                                 <input type="password" name="password" id="signup-password" placeholder="Password" />

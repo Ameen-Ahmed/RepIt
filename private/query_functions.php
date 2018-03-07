@@ -1,8 +1,8 @@
 <?php
 
-// signups
+// Users
 
-function find_all_signups() {
+function find_all_users() {
     global $db;
 
     $sql = "SELECT * FROM siteusers ";
@@ -13,7 +13,7 @@ function find_all_signups() {
     return $result;
 }
 
-function find_signup_by_id($id) {
+function find_user_by_id($id) {
     global $db;
 
     $sql = "SELECT * FROM siteusers ";
@@ -21,107 +21,120 @@ function find_signup_by_id($id) {
 
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
-    $signup = mysqli_fetch_assoc($result);
+    $user = mysqli_fetch_assoc($result);
     mysqli_free_result($result);
-    return $signup; // returns an assoc. array
+    return $user; // returns an assoc. array
 }
 
-function validate_signup($signup) {
+function find_user_by_username($username) {
+    global $db;
+
+    $sql = "SELECT * FROM siteusers ";
+    $sql .= "WHERE username='" . db_escape($db, $username) . "' ";
+    $sql .= "LIMIT 1";
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    $admin = mysqli_fetch_assoc($result); // find first
+    mysqli_free_result($result);
+    return $admin; // returns an assoc. array
+}
+
+function validate_user($user) {
     $errors = [];
 
 
     //First Name
-    if(is_blank($signup['firstname'])) {
+    if(is_blank($user['firstname'])) {
         $errors[] = "First Name cannot be left blank.";
     }
-    elseif(!has_length($signup['firstname'], ['min' => 1, 'max' => 35])) {
+    elseif(!has_length($user['firstname'], ['min' => 1, 'max' => 35])) {
         $errors[] = "First Name must be between 1 and 35 characters.";
     }
-    elseif(!has_only_letters($signup['firstname'])){
+    elseif(!has_only_letters($user['firstname'])){
         $errors[] = "First Name must only use letters";
     }
 
     //Last Name
-    if(is_blank($signup['lastname'])) {
+    if(is_blank($user['lastname'])) {
         $errors[] = "Last Name cannot be left blank.";
     }
-    elseif(!has_length($signup['lastname'], ['min' => 1, 'max' => 35])) {
+    elseif(!has_length($user['lastname'], ['min' => 1, 'max' => 35])) {
         $errors[] = "Last Name must be between 1 and 35 characters.";
     }
-    elseif(!has_only_letters($signup['lastname'])){
+    elseif(!has_only_letters($user['lastname'])){
         $errors[] = "Last Name must only use letters";
     }
 
     // Username
-    if(is_blank($signup['username'])) {
+    if(is_blank($user['username'])) {
         $errors[] = "Username cannot be left blank.";
     }
-    elseif(!has_length($signup['username'], ['min' => 2, 'max' => 35])) {
+    elseif(!has_length($user['username'], ['min' => 2, 'max' => 35])) {
         $errors[] = "Username must be between 2 and 35 characters.";
     }
-    elseif(!has_unique_user_name($signup['username'], "0")){
-         $errors[] = "Username must be unique.";
+    elseif(!has_unique_user_name($user['username'], "0")){
+        $errors[] = "Username must be unique.";
     }
 
     // Email
-    if(is_blank($signup['email'])) {
+    if(is_blank($user['email'])) {
         $errors[] = "Email cannot be left blank.";
     }
-    elseif(!has_length($signup['email'], ['min' => 2, 'max' => 35])) {
+    elseif(!has_length($user['email'], ['min' => 2, 'max' => 35])) {
         $errors[] = "Email must be between 2 and 35 characters.";
     }
-    elseif(!has_valid_email_format($signup['email'])){
+    elseif(!has_valid_email_format($user['email'])){
         $errors[] = "Email must be a valid email address.";
     }
 
     // Address
-    if(is_blank($signup['address'])) {
+    if(is_blank($user['address'])) {
         $errors[] = "Address cannot be left blank.";
     }
-    elseif(!has_length($signup['address'], ['min' => 4, 'max' => 55])) {
+    elseif(!has_length($user['address'], ['min' => 4, 'max' => 55])) {
         $errors[] = "Address must be between 4 and 55 characters.";
     }
-    if(!has_valid_address_format($signup['address'])) {
+    if(!has_valid_address_format($user['address'])) {
         $errors[] = "Address may contain no symbols except # and . ";
     }
 
     // City
-    if(is_blank($signup['city'])) {
+    if(is_blank($user['city'])) {
         $errors[] = "City cannot be left blank";
     }
-    elseif(!has_length($signup['city'], ['min' => 2, 'max' => 20])) {
+    elseif(!has_length($user['city'], ['min' => 2, 'max' => 20])) {
         $errors[] = "City must be between 2 and 20 characters";
     }
-    if(!has_valid_city_format($signup['city'])) {
+    if(!has_valid_city_format($user['city'])) {
         $errors[] = "City may contain no symbols except - ";
     }
 
 
     // State
-    if(is_blank($signup['state'])) {
+    if(is_blank($user['state'])) {
         $errors[] = "You must choose a state";
     }
 
     // Zipcode
-    if(is_blank($signup['zipcode'])) {
+    if(is_blank($user['zipcode'])) {
         $errors[] = "Zipcode cannot be left blank.";
     }
-    elseif(!has_length($signup['zipcode'], ['exactly' => 5])) {
+    elseif(!has_length($user['zipcode'], ['exactly' => 5])) {
         $errors[] = "Zipcode must be exactly 5 characters.";
     }
-    if(!has_only_numbers($signup['zipcode'])){
+    if(!has_only_numbers($user['zipcode'])){
         $errors[] = "Zipcodes may only have numbers.";
     }
 
 
     // Password
-    if(is_blank($signup['password'])) {
+    if(is_blank($user['password'])) {
         $errors[] = "Password cannot be left blank.";
     }
-    elseif(!has_length($signup['password'], ['min' => 2, 'max' => 30])) {
+    elseif(!has_length($user['password'], ['min' => 2, 'max' => 30])) {
         $errors[] = "Password must be between 2 and 30 characters.";
     }
-    elseif(!has_password_match($signup['password'], $signup['confirm_password'])){
+    elseif(!has_password_match($user['password'], $user['confirm_password'])){
         $errors[] = "Both password fields must match.";
     }
 
@@ -129,25 +142,25 @@ function validate_signup($signup) {
 }
 
 
-function insert_signup($signup) {
+function insert_user($user) {
     global $db;
 
-    $errors = validate_signup($signup);
+    $errors = validate_user($user);
     if(!empty($errors)) {
         return $errors;
     }
     $sql = "INSERT INTO siteusers ";
     $sql.= "(first_name, last_name, email, username, address, state, city, zipcode, password) ";
     $sql.= "VALUES (";
-    $sql.= "'" . db_escape($db, $signup['firstname']) . "', ";
-    $sql.= "'" . db_escape($db, $signup['lastname']) . "', ";
-    $sql.= "'" . db_escape($db, $signup['email']) . "', ";
-    $sql.= "'" . db_escape($db, $signup['username']) . "', ";
-    $sql.= "'" . db_escape($db, $signup['address']) . "', ";
-    $sql.= "'" . db_escape($db, $signup['state']) . "', ";
-    $sql.= "'" . db_escape($db, $signup['city']) . "', ";
-    $sql.= "'" . db_escape($db, $signup['zipcode']) . "', ";
-    $sql.= "'" . password_hash(db_escape($db, $signup['password']), PASSWORD_DEFAULT) . "'";
+    $sql.= "'" . db_escape($db, $user['firstname']) . "', ";
+    $sql.= "'" . db_escape($db, $user['lastname']) . "', ";
+    $sql.= "'" . db_escape($db, $user['email']) . "', ";
+    $sql.= "'" . db_escape($db, $user['username']) . "', ";
+    $sql.= "'" . db_escape($db, $user['address']) . "', ";
+    $sql.= "'" . db_escape($db, $user['state']) . "', ";
+    $sql.= "'" . db_escape($db, $user['city']) . "', ";
+    $sql.= "'" . db_escape($db, $user['zipcode']) . "', ";
+    $sql.= "'" . password_hash(db_escape($db, $user['password']), PASSWORD_DEFAULT) . "'";
     $sql.= ")";
     $result = mysqli_query($db, $sql);
 
@@ -162,20 +175,19 @@ function insert_signup($signup) {
     }
 }
 
-
-function update_signup($signup) {
+function update_user($user) {
     global $db;
 
-    $errors = validate_signup($signup);
+    $errors = validate_user($user);
     if(!empty($errors)) {
         return $errors;
     }
 
-    $sql = "UPDATE signups SET ";
-    $sql .= "menu_name='" . db_escape($db, $signup['menu_name']) . "', ";
-    $sql .= "position='" . db_escape($db, $signup['position']) . "', ";
-    $sql .= "visible='" . db_escape($db, $signup['visible']) . "' ";
-    $sql .= "WHERE id='" . db_escape($db, $signup['id']) . "' ";
+    $sql = "UPDATE users SET ";
+    $sql .= "menu_name='" . db_escape($db, $user['menu_name']) . "', ";
+    $sql .= "position='" . db_escape($db, $user['position']) . "', ";
+    $sql .= "visible='" . db_escape($db, $user['visible']) . "' ";
+    $sql .= "WHERE id='" . db_escape($db, $user['id']) . "' ";
     $sql .= "LIMIT 1";
 
     $result = mysqli_query($db, $sql);
@@ -191,10 +203,10 @@ function update_signup($signup) {
 
 }
 
-function delete_signup($id) {
+function delete_user($id) {
     global $db;
 
-    $sql = "DELETE FROM signups ";
+    $sql = "DELETE FROM siteusers ";
     $sql .= "WHERE id='" . db_escape($db, $id) . "' ";
     $sql .= "LIMIT 1";
     $result = mysqli_query($db, $sql);
@@ -211,6 +223,8 @@ function delete_signup($id) {
 }
 
 
+// States
+
 function find_all_state_abrr() {
     global $db;
 
@@ -219,4 +233,3 @@ function find_all_state_abrr() {
     confirm_result_set($result);
     return $result;
 }
-
