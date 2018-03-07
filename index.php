@@ -75,16 +75,12 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                     </section>
             </div>
         </div>
+        </div>
+    <!-- Header -->
+    <div id="header-wrapper" class="wrapper" style="padding:50px 50px 50px 100px;">
+        <?php require_once('private/shared/footer.php');?>
+    </div>
 
-        <!-- Footer -->
-        <div id="footer-wrapper" class="wrapper">
-            <div id="copyright">
-                <ul>
-                    <li>&copy; RepIt 2018</li>
-                </ul>
-            </div>
-        </div>
-        </div>
 
     <!-- Scripts -->
     <script src="assets/js/jquery.min.js"></script>

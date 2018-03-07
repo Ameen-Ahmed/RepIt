@@ -103,12 +103,9 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                             </div>
                             <hr />
                         </div>
-                        <div id="copyright">
-                            <ul>
-                                <li>&copy; RepIt 2018</li>
-                            </ul>
-                        </div>
                     </div>
+                    <!-- Footer -->
+                    <?php require_once('private/shared/footer.php');?>
                 </div>
             </div>
         </div>

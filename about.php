@@ -34,11 +34,8 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                             <p class="style3" style="text-align:left;font-size:24;">Never before has there been one central location where you can sell and purchase a myriad of quality event merchandise.</p>
                         </section>
                     </div>
-                    <div id="copyright">
-                        <ul>
-                            <li>&copy; RepIt 2018</li>
-                        </ul>
-                    </div>
+                    <!-- Footer -->
+                    <?php require_once('private/shared/footer.php');?>
                 </div>
             </div>
         </div>

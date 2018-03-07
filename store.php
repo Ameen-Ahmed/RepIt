@@ -54,19 +54,12 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                                             <li><a href="#" class="button style1">Learn More</a></li>
                                         </ul>
                                     </section>
-
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
-                    <div id="copyright">
-                        <ul>
-                            <li>&copy; RepIt 2018</li>
-                        </ul>
-                    </div>
+                    <!-- Footer -->
+                    <?php require_once('private/shared/footer.php');?>
                 </div>
             </div>
         </div>

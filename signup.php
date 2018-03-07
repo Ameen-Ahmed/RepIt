@@ -127,11 +127,8 @@ mysqli_free_result($state_set);
                             </div>
                             <hr />
                         </div>
-                        <div id="copyright">
-                            <ul>
-                                <li>&copy; RepIt 2018</li>
-                            </ul>
-                        </div>
+                        <!-- Footer -->
+                        <?php require_once('private/shared/footer.php');?>
                     </div>
                 </div>
             </div>
