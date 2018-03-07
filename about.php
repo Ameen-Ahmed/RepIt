@@ -19,22 +19,13 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
             <div id="header-wrapper" class="wrapper">
                 <div id="header">
                     <!-- Nav -->
-                    <nav id="nav">
-                        <ul>
-                            <li class="current"><a href="index.php">Home</a></li>
-                            <li><a href="about.php">About Us</a></li>
-                            <li><a href="store.php">Store</a></li>
-                            <li><a href="signup.php">Sign Up</a></li>
-                            <li><a href="login.php">Login</a></li>
-                            <li><a href="contact.php">Contact Us</a></li>
-                        </ul>
-                    </nav>
+                    <?php include_once('private/shared/navigation.php');?>
                     <!-- Intro -->
                     <div id="intro-wrapper" class="wrapper style1">
                         <div class="title">About Us</div>
                         <section id="intro" class="container">
                             <p class="style2" style="font-size:32;">
-                            Our mission is to provide a venue where entertainment fans of all kinds can come to buy and sell event merchandise they can’t find anywhere else.
+                                Our mission is to provide a venue where entertainment fans of all kinds can come to buy and sell event merchandise they can’t find anywhere else.
                             </p>
                             <p class="style3" style="text-align:left;font-size:24;"> Every fan wants to be able to show their support for their favorite artist and every artist wants to reach out to their audience. We want to be the bridge that makes these interactions <strong> safe</strong> and <strong>enjoyable</strong>.</p><br />
                             <p class="style3" style="text-align:left;font-size:24;">If you’re an artist, this is your opportunity to sell your one-of-a-kind, limited edition merchandise on a platform that reaches all your fans.</p><br />

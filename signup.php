@@ -60,16 +60,8 @@ mysqli_free_result($state_set);
             <div id="header-wrapper" class="wrapper">
                 <div id="header">
                     <!-- Nav -->
-                    <nav id="nav">
-                        <ul>
-                            <li class="current"><a href="index.php">Home</a></li>
-                            <li><a href="about.php">About Us</a></li>
-                            <li><a href="store.php">Store</a></li>
-                            <li><a href="signup.php">Sign Up</a></li>
-                            <li><a href="login.php">Login</a></li>
-                            <li><a href="contact.php">Contact Us</a></li>
-                        </ul>
-                    </nav>
+                    <?php include_once('private/shared/navigation.php');?>
+
                     <span style="color:red; font-size:1.2em;"><?php echo display_errors($errors)?></span>
                     <!-- Footer -->
                     <div id="footer-wrapper" class="wrapper">
@@ -144,6 +136,6 @@ mysqli_free_result($state_set);
                 </div>
             </div>
         </div>
-        <?php db_disconnect($db); ?>
+
     </body>
 </html>
