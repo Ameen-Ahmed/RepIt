@@ -1,4 +1,46 @@
-<?php require_once('private/initialize.php');?>
+<?php require_once('private/initialize.php');
+
+$errors = [];
+$username = '';
+$password = '';
+
+if(is_post_request()) {
+
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    // Validations
+    if(is_blank($username)) {
+        $errors[] = "Username cannot be blank.";
+    }
+    if(is_blank($password)) {
+        $errors[] = "Password cannot be blank.";
+    }
+
+    // if there were no errors, try to login
+    if(empty($errors)) {
+        // Using one variable ensures that msg is the same
+        $login_failure_msg = "Log in was unsuccessful.";
+
+        $user = find_user_by_username($username);
+        if($user) {
+
+            if(password_verify($password, $user['password'])) {
+                // password matches
+                log_in_user($user);
+                echo "LOGIN SUCCESSFUL";
+            } else {
+                // username found, but password does not match
+                $errors[] = $login_failure_msg;
+            }
+
+        } else {
+            // no username found
+            $errors[] = $login_failure_msg;
+        }
+    }
+}
+?>
 <!DOCTYPE HTML>
 <!--
 Escape Velocity by HTML5 UP
@@ -15,6 +57,7 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
         <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
     </head>
     <body class="homepage">
+        <?php echo display_errors($errors); ?>
         <div id="page-wrapper">
             <!-- Header -->
             <div id="header-wrapper" class="wrapper">
@@ -35,10 +78,10 @@ Free for personal and commercial use under the CCA 3.0 license (html5up.net/lice
                                         <form method="post" action="#">
                                             <div class="row 50%">
                                                 <div class="6u 12u(mobile)">
-                                                    <input type="text" name="name" id="contact-name" placeholder="Username" />
+                                                    <input type="text" name="username" id="contact-name" placeholder="Username" />
                                                 </div>
                                                 <div class="6u 12u(mobile)">
-                                                    <input type="text" name="email" id="contact-email" placeholder="Password" />
+                                                    <input type="text" name="password" id="contact-email" placeholder="Password" />
                                                 </div>
                                             </div>
                                             <div class="row">
