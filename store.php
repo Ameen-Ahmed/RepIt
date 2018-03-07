@@ -1,3 +1,4 @@
+<?php require_once('private/initialize.php');?>
 <!DOCTYPE HTML>
 <!--
 Escape Velocity by HTML5 UP
