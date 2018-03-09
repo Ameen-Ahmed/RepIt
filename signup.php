@@ -18,6 +18,8 @@ if(is_post_request()) {
     if($result === true) {
         $new_id = mysqli_insert_id($db);
         echo "SUCCESSFUL";
+
+        mailer($user['firstname'] . $user['lastname'], $user['email'], 'Confirmation email');
         //        redirect_to(url_for(''));
 
     }
