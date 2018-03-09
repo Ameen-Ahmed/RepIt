@@ -82,9 +82,7 @@ $page_title = 'Contact';
                                         <div class="6u 12u(mobile)">
                                             <section>
                                                 <h3 class="icon fa-envelope">Email</h3>
-                                                <p>
-                                                    <a href="#">repit@gmail.com</a>
-                                                </p>
+                                                <p>rep.it.contactus@gmail.com</p>
                                             </section>
                                         </div>
                                         <div class="6u 12u(mobile)">
