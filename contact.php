@@ -1,4 +1,12 @@
 <?php require_once('private/initialize.php');
+
+if(is_post_request()){
+
+    $name = $_POST['name'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $message = $_POST['message'] ?? '';
+    mailer($name, $email, $message);
+}
 $page_title = 'Contact';
 ?>
 
