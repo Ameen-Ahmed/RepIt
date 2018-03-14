@@ -45,7 +45,7 @@ function buildInvoice(){
       exit(1); // We do not want to continue if something went wrong
   }
 }
-  setBuyerInfo();
+  //setBuyerInfo();
   // setItemInfo("test", "test", '99');
   // setInvoiceInfo($buyer, $item, "0043");
   // buildInvoice();
