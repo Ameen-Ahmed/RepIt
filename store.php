@@ -5,7 +5,6 @@ require_once('private/initialize.php');
 $page_title = 'Store';
 ?>
 <?php
-echo "<pre>";
  require('private/Bitpay/create_invoice.php');?>
 
 <?php include_once('private/shared/header.php');?>
@@ -70,8 +69,8 @@ echo "<pre>";
     else
       bitpay.setApiUrlPrefix("https://bitpay.com")
     <?php
-      setItemInfo('itemCode', 'itemDescription', '7');
-      setInvoiceInfo($buyer, $item, 'orderId');
+      setItemInfo("itemCode", "itemDescription", "7");
+      setInvoiceInfo($buyer, $item, "orderId");
       buildInvoice();
     ?>
     bitpay.showInvoice("<?php echo $invoice->getId();?>");
