@@ -27,7 +27,8 @@ $page_title = 'Store';
                                     <h3><a href="#">Ariana Grande Sweater</a></h3>
                                     <h5>Price:  $59.99</h5>
                                     <br />
-                                    <button class="button style1" onClick='payment_request("Order #00294", "Item #0001", "Ariana Grande T-Shirt", "59.99")'>Buy Now</button>
+                                    <input class="button style1" onClick='payment_request("Order #00294", "Item #0001", "Ariana Grande T-Shirt", "59.99", this)'type="button" value="Buy Now" id="myButton1"></input>
+
                                 </section>
                             </div>
                             <div class="4u 12u(mobile)">
@@ -36,7 +37,7 @@ $page_title = 'Store';
                                     <h3><a href="#">Travis $cott Rodeo Bomber Jacket</a></h3>
                                     <h5>Price:  $119.99</h5>
                                     <br />
-                                    <button class="button style1" onClick='payment_request("Order #00365", "Item #0002", "Travis $cott Jacker", "119.99")'>Buy Now</button>
+                                    <input class="button style1"  onClick='payment_request("Order #00365", "Item #0002", "Travis $cott Jacker", "119.99", this)' type="button" value="Buy Now" id="myButton1"></input>
                                 </section>
                             </div>
                             <div class="4u 12u(mobile)">
@@ -45,7 +46,7 @@ $page_title = 'Store';
                                     <h3><a href="#">XO Weeknd T-shirt</a></h3>
                                     <h5>Price:  $19.99</h5>
                                     <br />
-                                    <button class="button style1" onClick='payment_request("Order #00234", "Item #0003", "XO Weeknd T-Shirt", "19.99")'>Buy Now</button>
+                                    <input class="button style1"  onClick='payment_request("Order #00234", "Item #0003", "XO Weeknd T-Shirt", "19.99", this)' type="button" value="Buy Now" id="myButton1"></input>
                                 </section>
                             </div>
                         </div>
