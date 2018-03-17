@@ -35,4 +35,3 @@ function db_escape($connection, $string) {
 
 
 ?>
-

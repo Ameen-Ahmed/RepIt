@@ -48,6 +48,11 @@
 		-webkit-text-size-adjust: none;
 	}
 
+/*Shopping Cart Border*/
+.cart-border{
+    border-bottom: 2px solid lightgrey;
+}
+
 /* Box Model */
 
 	*, *:before, *:after {
@@ -84,6 +89,8 @@
 	.container {
 		width: 960px;
 	}
+
+
 
 	@media screen and (min-width: 737px) {
 

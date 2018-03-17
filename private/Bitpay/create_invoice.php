@@ -1,7 +1,7 @@
 <?php
 
 
-require("client_configuration.php");
+require_once("client_configuration.php");
 
 $buyer = new \Bitpay\Buyer();
 $item = new \Bitpay\Item();

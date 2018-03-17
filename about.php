@@ -13,7 +13,7 @@ $page_title = 'About Us';
                 <?php include_once('private/shared/navigation.php');?>
                 <!-- Intro -->
                 <div id="intro-wrapper" class="wrapper style1">
-                    <div class="title">About Us</div>
+                    <div class="title"><font size=5>About Us</font></div>
                     <section id="intro" class="container">
                         <p class="style2" style="font-size:32;">
                             Our mission is to provide a venue where entertainment fans of all kinds can come to buy and sell event merchandise they can’t find anywhere else.
@@ -29,5 +29,13 @@ $page_title = 'About Us';
             </div>
         </div>
     </div>
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.dropotron.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/skel-viewport.min.js"></script>
+<script src="assets/js/util.js"></script>
+<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+<script src="assets/js/main.js"></script>
 </body>
 </html>

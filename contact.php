@@ -22,7 +22,7 @@ $page_title = 'Contact';
 
                 <!-- Footer -->
                 <div id="footer-wrapper" class="wrapper">
-                    <div class="title">Contact Us</div>
+                    <div class="title"><font size=5>Contact Us</font></div>
                     <div id="footer" class="container">
                         <header class="style1">
                             <h2>Have a question or comment?</h2>
@@ -100,10 +100,21 @@ $page_title = 'Contact';
                         <hr />
                     </div>
                 </div>
-                <!-- Footer -->
-                <?php require_once('private/shared/footer.php');?>
             </div>
         </div>
+        <!-- Header -->
+        <div id="header-wrapper" class="wrapper" style="padding:50px 50px 50px 100px;">
+            <?php require_once('private/shared/footer.php');?>
+        </div>
     </div>
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.dropotron.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/skel-viewport.min.js"></script>
+<script src="assets/js/util.js"></script>
+<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+<script src="assets/js/main.js"></script>
+
 </body>
 </html>
