@@ -7,13 +7,13 @@ $page_title = 'Store';
 ?>
 <?php include_once('private/shared/header.php');
 if(is_post_request()) {
-    if(isset($_POST['1'] )){
+    if(isset($_POST['store1'] )){
       add_item('1');
     }
-    else if(isset($_POST['2'])){
+    else if(isset($_POST['store2'])){
       add_item('2');
     }
-    else if(isset($_POST['3'])){
+    else if(isset($_POST['store3'])){
       add_item('3');
     }
 }
@@ -42,7 +42,7 @@ if(is_post_request()) {
                                     <h3><a href="#">Ariana Grande Sweater</a></h3>
                                     <h5>Price:  $59.99</h5>
                                     <br />
-                                    <input class="button style1" name=1 type="submit" value="Add to Cart"></input>
+                                    <input class="button style1" name='store1' type="submit" value="Add to Cart"></input>
 
                                 </section>
                             </div>
@@ -52,7 +52,7 @@ if(is_post_request()) {
                                     <h3><a href="#">Travis $cott Rodeo Bomber Jacket</a></h3>
                                     <h5>Price:  $119.99</h5>
                                     <br />
-                                    <input class="button style1" name=2 type="submit" value="Add to Cart"></input>
+                                    <input class="button style1" name='store2' type="submit" value="Add to Cart"></input>
                                 </section>
                             </div>
                             <div class="4u 12u(mobile)">
@@ -61,7 +61,7 @@ if(is_post_request()) {
                                     <h3><a href="#">XO Weeknd T-shirt</a></h3>
                                     <h5>Price:  $19.99</h5>
                                     <br />
-                                    <input class="button style1" name=3 type="submit" value="Add to Cart"></input>
+                                    <input class="button style1" name='store3' type="submit" value="Add to Cart"></input>
                                 </section>
                             </div>
                         </div>

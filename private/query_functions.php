@@ -236,7 +236,7 @@ function find_all_state_abrr() {
 
 function get_user_carts($user_id) {
     global $db;
-    $sql = "SELECT siteusers.username AS username,
+    $sql = "SELECT usercarts.quantity AS itemQuantity, siteusers.username AS username,
     siteproducts.description AS itemDescription, siteproducts.status AS itemStatus,
     siteproducts.price AS itemPrice, siteproducts.name AS itemName,
     siteproducts.owner_id AS seller,siteproducts.file_path AS itemPath,
@@ -291,7 +291,7 @@ function insert_cart_item($user_id, $item_id) {
     }
 }
 
-function update_cart_item_quantity($user_id,$item_id) {
+function update_cart_item($user_id,$item_id) {
     global $db;
 
 
@@ -314,21 +314,15 @@ function update_cart_item_quantity($user_id,$item_id) {
 
 function item_in_cart($user_id, $item_id){
   global $db;
-  $sql = "SELECT * FROM usercarts WHERE user_id = " . $user_id .  " AND item_id = " . 2 . "";
-  echo $sql;
-  echo "<br/>";
+  $sql = "SELECT 1 FROM usercarts WHERE user_id = $user_id AND item_id = $item_id";
   //$sql .= "WHERE user_id ='" . db_escape($db, $user_id) . "' AND item_id = '" . db_escape($db, $item_id) . "'";
 
   $result = mysqli_query($db, $sql);
-  echo "NUM ROWS:" . mysqli_num_rows($result) . "<br />";
   // For UPDATE statements, $result is true/false
   if($result && mysqli_num_rows($result) > 0) {
-      echo true;
       return true;
-
-  } else {
-      // UPDATE failed
-      echo false;
+  }
+  else {
       return false;
   }
 }

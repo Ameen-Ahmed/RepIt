@@ -5,16 +5,13 @@ $current_user = '3';
 
 
 if(is_post_request()) {
-
   $s = get_user_carts($current_user);
-  $subtotal = 0;
   while($row=mysqli_fetch_array($s)){
-    $id = $row['itemId'];
-    if(isset($_POST[$id])){
-      remove_item($id);
+    $item = $row['itemId'];
+    if(isset($_POST['cart'.$item])){
+      remove_item($item);
     }
   }
-
 }
 
 
@@ -33,7 +30,8 @@ function add_item($item){
     insert_cart_item($current_user, $item);
   }
   else{
-    update_cart_item_quantity($current_user, $item);
+    update_cart_item($current_user, $item);
+
   }
 
 }
@@ -94,9 +92,10 @@ function display_cart_item($item){
               echo "</div>";
 
               echo "<div class='3u 12u(mobile)'>";
-                  echo "<font size=5 color='red'><b>Price:</b> $$item[itemPrice]</font><br/><br/><br/>";
+                  echo "<font size=5 color='red'><b>Price:</b> $$item[itemPrice]</font><br/>";
+                  echo "<font size=5 color='lightgrey'><b>Qty:</b> $item[itemQuantity]</font><br/><br/>";
                   echo "<form method='post' action='#'>";
-                    echo "<input class='button style1' name=$item[itemId] type='submit' value='Remove'></input>";
+                    echo "<input class='button style1' name='cart$item[itemId]' type='submit' value='Remove'></input>";
                   echo "</form>";
               echo "</div>";
             echo "</div>";
