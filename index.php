@@ -20,7 +20,7 @@ $page_title = 'Home';
 
         <!-- Main -->
         <div class="wrapper style2">
-            <div class="title">Welcome</div>
+            <div class="title"><font size=5>Welcome</font></div>
             <div id="main" class="container">
                 <!-- Features -->
                 <section id="features">
@@ -58,8 +58,8 @@ $page_title = 'Home';
                         </div>
                     </div>
                     <ul class="actions actions-centered">
-                        <li><a href="store.html" class="button style1 big">Get Started</a></li>
-                        <li><a href="about.html" class="button style2 big">About Us</a></li>
+                        <li><a href="store.php" class="button style1 big">Get Started</a></li>
+                        <li><a href="about.php" class="button style2 big">About Us</a></li>
                     </ul>
                     </div>
                 </section>
