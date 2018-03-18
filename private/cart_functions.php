@@ -47,7 +47,7 @@ function populate_cart(){
   $subtotal = 0;
   while($row=mysqli_fetch_array($s)){
     display_cart_item($row);
-    $subtotal += $row['itemPrice'];
+    $subtotal += ($row['itemPrice'] * $row['itemQuantity']);
   }
   if($subtotal > 0){
     echo "<div class='feature-list'>";
@@ -93,7 +93,7 @@ function display_cart_item($item){
 
               echo "<div class='3u 12u(mobile)'>";
                   echo "<font size=5 color='red'><b>Price:</b> $$item[itemPrice]</font><br/>";
-                  echo "<font size=5 color='lightgrey'><b>Qty:</b> $item[itemQuantity]</font><br/><br/>";
+                  echo "<font size=5 color='grey'><b>Qty:</b> $item[itemQuantity]</font><br/><br/>";
                   echo "<form method='post' action='#'>";
                     echo "<input class='button style1' name='cart$item[itemId]' type='submit' value='Remove'></input>";
                   echo "</form>";

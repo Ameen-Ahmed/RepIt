@@ -234,6 +234,17 @@ function find_all_state_abrr() {
     return $result;
 }
 
+function get_available_store_items() {
+    global $db;
+    $sql = "SELECT * FROM siteproducts ";
+    $sql .= "WHERE status='Available' ";
+    //die(mysqli_error($db));
+
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result; // returns an assoc. array
+}
+
 function get_user_carts($user_id) {
     global $db;
     $sql = "SELECT usercarts.quantity AS itemQuantity, siteusers.username AS username,
@@ -309,7 +320,6 @@ function update_cart_item($user_id,$item_id) {
         db_disconnect($db);
         exit;
     }
-
 }
 
 function item_in_cart($user_id, $item_id){

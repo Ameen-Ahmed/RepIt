@@ -22,7 +22,7 @@ $page_title = 'Shopping Cart';
 
                         <!-- Features -->
                               <?php
-                              require_once('private/test.php');
+                              require_once('private/cart_functions.php');
                                   initialize_cart('3');
                                   populate_cart();
 
