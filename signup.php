@@ -61,7 +61,7 @@ $page_title = 'Sign Up';
                 <span style="color:red; font-size:1.2em;"><?php echo display_errors($errors)?></span>
                 <!-- Footer -->
                 <div id="footer-wrapper" class="wrapper">
-                    <div class="title">Sign Up</div>
+                    <div class="title"><font size=5>Sign Up</font></div>
                     <div id="footer" class="container">
                         <hr />
                         <div class="row 150%">
@@ -129,6 +129,13 @@ $page_title = 'Sign Up';
             </div>
         </div>
     </div>
-
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.dropotron.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/skel-viewport.min.js"></script>
+<script src="assets/js/util.js"></script>
+<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+<script src="assets/js/main.js"></script>
 </body>
 </html>

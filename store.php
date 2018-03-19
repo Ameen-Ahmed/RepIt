@@ -1,4 +1,6 @@
-<?php require_once('private/initialize.php');
+<?php
+require_once('private/initialize.php');
+
 $page_title = 'Store';
 ?>
 
@@ -14,38 +16,11 @@ $page_title = 'Store';
 
                 <!-- Highlights -->
                 <div class="wrapper style3">
-                    <div class="title">Store</div>
+                    <div class="title"><font size=5>Store</font></div>
                     <div id="highlights" class="container">
-                        <div class="row 150%">
-                            <div class="4u 12u(mobile)">
-                                <section class="highlight">
-                                    <a href="#" class="image featured"><img src="images/ArianaGrandeShirt.jpg" alt="" /></a>
-                                    <h3><a href="#">Ariana Grande Sweater</a></h3>
-                                    <ul class="actions">
-                                        <li><a href="#" class="button style1">Learn More</a></li>
-                                    </ul>
-                                </section>
-                            </div>
-                            <div class="4u 12u(mobile)">
-                                <section class="highlight">
-                                    <a href="#" class="image featured"><img src="images/travis-scott-jacket.jpg" alt="" /></a>
-                                    <h3><a href="#">Travis $cott Rodeo Bomber Jacket</a></h3>
-                                    <ul class="actions">
-                                        <li><a href="#" class="button style1">Learn More</a></li>
-                                    </ul>
-                                </section>
-                            </div>
-                            <div class="4u 12u(mobile)">
-                                <section class="highlight">
-                                    <a href="#" class="image featured"><img src="images/XO-Weeknd-TSHIRT.jpg" alt="" /></a>
-                                    <h3><a href="#">XO Weeknd T-shirt</a></h3>
-
-                                    <ul class="actions">
-                                        <li><a href="#" class="button style1">Learn More</a></li>
-                                    </ul>
-                                </section>
-                            </div>
-                        </div>
+                      <?php require_once('private/store_functions.php');
+                          populate_store();
+                      ?>
                     </div>
                 </div>
                 <!-- Footer -->
@@ -55,4 +30,15 @@ $page_title = 'Store';
     </div>
     </div>
 </body>
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.dropotron.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/skel-viewport.min.js"></script>
+<script src="assets/js/util.js"></script>
+<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+<script src="assets/js/main.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://bitpay.com/bitpay.js" type="text/javascript"> </script>
 </html>

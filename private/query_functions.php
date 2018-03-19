@@ -233,3 +233,106 @@ function find_all_state_abrr() {
     confirm_result_set($result);
     return $result;
 }
+
+function get_available_store_items() {
+    global $db;
+    $sql = "SELECT * FROM siteproducts ";
+    $sql .= "WHERE status='Available' ";
+    //die(mysqli_error($db));
+
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result; // returns an assoc. array
+}
+
+function get_user_carts($user_id) {
+    global $db;
+    $sql = "SELECT usercarts.quantity AS itemQuantity, siteusers.username AS username,
+    siteproducts.description AS itemDescription, siteproducts.status AS itemStatus,
+    siteproducts.price AS itemPrice, siteproducts.name AS itemName,
+    siteproducts.owner_id AS seller,siteproducts.file_path AS itemPath,
+    siteproducts.item_id AS itemId
+    FROM usercarts ";
+    $sql .= "INNER JOIN siteusers ON usercarts.user_id = siteusers.id ";
+    $sql .= "INNER JOIN siteproducts ON usercarts.item_id = siteproducts.item_id ";
+    $sql .= "WHERE siteusers.id = '" . db_escape($db,$user_id) . "'";
+    //die(mysqli_error($db));
+
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result; // returns an assoc. array
+}
+
+function delete_cart_item($user_id, $item_id) {
+    global $db;
+
+    $sql = "DELETE FROM usercarts ";
+    $sql .= "WHERE user_id='" . db_escape($db, $user_id) . "' AND item_id='" . db_escape($db, $item_id) . "' ";
+    $sql .= "LIMIT 1";
+    $result = mysqli_query($db, $sql);
+
+    // For DELETE statements, $result is true/false
+    if($result) {
+        return true;
+    } else {
+        // DELETE failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+
+function insert_cart_item($user_id, $item_id) {
+    global $db;
+
+
+    $sql = "INSERT INTO usercarts ";
+    $sql.= "(user_id, item_id, quantity)";
+    $sql.= "VALUES ('" . db_escape($db, $user_id) . "', '" . db_escape($db, $item_id) . "', 1)";
+    $result = mysqli_query($db, $sql);
+
+    // For INSERT statements, $result is true/false
+    if($result) {
+        return true;
+    } else {
+        // INSERT failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+
+function update_cart_item($user_id,$item_id) {
+    global $db;
+
+
+    $sql = "UPDATE usercarts SET ";
+    $sql .= "quantity = quantity + 1 ";
+    $sql .= "WHERE user_id ='" . db_escape($db, $user_id) . "' AND item_id = '" . db_escape($db, $item_id) . "'";
+
+    $result = mysqli_query($db, $sql);
+    // For UPDATE statements, $result is true/false
+    if($result) {
+        return true;
+    } else {
+        // UPDATE failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+
+function item_in_cart($user_id, $item_id){
+  global $db;
+  $sql = "SELECT 1 FROM usercarts WHERE user_id = $user_id AND item_id = $item_id";
+  //$sql .= "WHERE user_id ='" . db_escape($db, $user_id) . "' AND item_id = '" . db_escape($db, $item_id) . "'";
+
+  $result = mysqli_query($db, $sql);
+  // For UPDATE statements, $result is true/false
+  if($result && mysqli_num_rows($result) > 0) {
+      return true;
+  }
+  else {
+      return false;
+  }
+}
