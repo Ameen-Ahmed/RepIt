@@ -1,4 +1,4 @@
-<?php // require_once('private/initialize.php');
+<?php require_once('private/initialize.php');
 $page_title = 'About Us';
 ?>
 
@@ -35,7 +35,7 @@ $page_title = 'About Us';
                             <h3>Co-Founder and CEO</h3>
                             <br>
                             <p>Favorite Color: Red</p>
-                            <p>Favorite Artist: The Weeknd</p>
+                            <p>Favorite Artist: Chris Brown</p>
                         </div>
                         <div style="clear: left;">
                             <p style="float: left;"><img src="images/agyakwa_circle.gif" height="300" width="300" border="1px"></p>
