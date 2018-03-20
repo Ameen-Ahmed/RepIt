@@ -1,18 +1,8 @@
-<?php require_once('query_functions.php');
+<?php
+include('private/Bitpay/create_invoice.php');
 
 $current_user = '3';
 
-
-
-if(is_post_request()) {
-  $s = get_user_carts($current_user);
-  while($row=mysqli_fetch_array($s)){
-    $item = $row['itemId'];
-    if(isset($_POST['cart'.$item])){
-      remove_item($item);
-    }
-  }
-}
 
 
 function initialize_cart($owner){
@@ -35,6 +25,7 @@ function add_item($item){
   }
 
 }
+
 
 function remove_item($item_id){
   global $current_user;
@@ -62,7 +53,9 @@ function populate_cart(){
     echo "</div>";
 
     echo "<ul class='actions actions-centered'>";
-    echo "<input class='button style3' onClick=''type='button' value='Check Out' id='myButton1'></input>";
+    echo "<form method='post' action='#'>";
+      echo "<input class='button style3' name='checkout' type='submit' id='checkout_button' value='Check Out'></input>";
+    echo "</form>";
   }
   else{
     echo "<p align='center'><font size=5 color='lightgrey'><b>Your Cart Is Empty.</b> </font></p>";
@@ -111,5 +104,25 @@ function display_cart_item($item){
     echo "</div>";
   //echo "</div>";
 }
+
+function build_invoice(){
+  global $current_user;
+  $s = get_user_carts($current_user);
+  $subtotal = 0;
+  $items = '';
+  while($row=mysqli_fetch_array($s)){
+    $items .= $row['itemName']. " Qty.". (string)$row['itemQuantity']. " | ";
+    $subtotal += ($row['itemPrice'] * $row['itemQuantity']);
+  }
+  return array($items, $subtotal);
+}
+
+function checkout_cart_items(){
+  $retval = build_invoice();
+  $retId = sendInvoice('order', 1234, $retval[0], $retval[1]);
+  return $retId;
+}
+
+
 
 ?>

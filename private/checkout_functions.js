@@ -1,4 +1,4 @@
-;function payment_request(order, item, description, price, button) {
+function payment_request(order, item, description, price, button) {
     button.value = "Loading...";
     button.disabled = true;
     $.ajax({

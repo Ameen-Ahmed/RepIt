@@ -3,39 +3,34 @@
 
 require_once("client_configuration.php");
 
-$buyer = new \Bitpay\Buyer();
-$item = new \Bitpay\Item();
-$invoice = new \Bitpay\Invoice();
 
 
-function setBuyerInfo(){
-  global $buyer;
+
+function sendInvoice($orderId, $itemCode, $itemDescription, $itemPrice){
+  global $client;
+  $buyer = new \Bitpay\Buyer();
+  $item = new \Bitpay\Item();
+  $invoice = new \Bitpay\Invoice();
+
   $buyerEmail = "testbuyer@mail.com";
   $buyer
       ->setEmail($buyerEmail);
-}
 
-function setItemInfo($itemCode, $itemDescription, $itemPrice){
-  global $item;
   $item
       ->setCode($itemCode)
       ->setDescription($itemDescription)
       ->setPrice($itemPrice);
-}
 
-function setInvoiceInfo($buyer, $item, $orderId){
-  global $invoice;
   $invoice
       ->setBuyer($buyer)
       ->setItem($item)
       ->setCurrency(new \Bitpay\Currency('USD'))
       ->setOrderId($orderId)
-      ->setNotificationUrl('localhost/RepIt/store.php');
-}
-function buildInvoice(){
-  global $invoice, $client;
+      ->setNotificationUrl('localhost/RepIt/shopping_cart.php');
+
   try {
       $client->createInvoice($invoice);
+      return $invoice;
   } catch (\Exception $e) {
       $request  = $client->getRequest();
       $response = $client->getResponse();

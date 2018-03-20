@@ -7,6 +7,7 @@ if(is_post_request()) {
     $item = $row['item_id'];
     if(isset($_POST['item'.$item])){
       add_item($item);
+      bitpay.setApiUrlPrefix("https://test.bitpay.com");
     }
   }
 }
