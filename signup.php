@@ -16,11 +16,10 @@ if(is_post_request()) {
     $result = insert_user($user);
 
     if($result === true) {
-        $new_id = mysqli_insert_id($db);
-        echo "SUCCESSFUL";
-
+        $user['id'] = mysqli_insert_id($db);
+        log_in_user($user);
         mailer($user['firstname'] . $user['lastname'], $user['email'], 'Confirmation email');
-        //        redirect_to(url_for(''));
+        redirect_to(url_for('index.php'));
 
     }
     else{

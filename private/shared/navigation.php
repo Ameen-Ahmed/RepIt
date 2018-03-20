@@ -5,7 +5,19 @@
         <li><a href="store.php">Store</a></li>
         <li><a href="shopping_cart.php">Shopping Cart</a></li>
         <li><a href="signup.php">Sign Up</a></li>
-        <li><a href="login.php">Login</a></li>
+        <?php
+            if(!is_logged_in()){
+                echo "<li><a href=login.php>Login</a></li>";
+            }
+        ?>
+        <?php
+            if(is_logged_in()){
+                echo "<li><a href=logout.php>Logout</a></li>";
+            }
+        ?>
         <li><a href="contact.php">Contact Us</a></li>
     </ul>
+    <?php if (is_logged_in()){
+        echo "Logged In as: " . $_SESSION['username'];}
+    ?>
 </nav>
