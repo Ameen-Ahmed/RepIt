@@ -28,7 +28,6 @@ if(is_post_request()) {
             if(password_verify($password, $user['password'])) {
                 // password matches
                 log_in_user($user);
-                echo "LOGIN SUCCESSFUL";
             } else {
                 // username found, but password does not match
                 $errors[] = $login_failure_msg;
