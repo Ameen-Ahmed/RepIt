@@ -28,6 +28,8 @@ if(is_post_request()) {
             if(password_verify($password, $user['password'])) {
                 // password matches
                 log_in_user($user);
+                $_SESSION['current_user_id'] = $user['id'];
+                redirect_to("shopping_cart.php");
             } else {
                 // username found, but password does not match
                 $errors[] = $login_failure_msg;

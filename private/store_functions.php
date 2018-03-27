@@ -15,18 +15,21 @@ if(is_post_request()) {
 function populate_store(){
   global $current_user;
   $results = get_available_store_items();
+  $num_elements = mysqli_num_rows($results);
+  if($num_elements >= 3){
+    $num_elements = 3;
+  }
   echo "<form method='post' action='#'>";
     echo "<div class='row 150%'>";
       while($row=mysqli_fetch_array($results)){
-        display_store_item($row);
+        display_store_item($row, $num_elements);
       }
     echo "</div>";
   echo "</form>";
 }
 
-
-function display_store_item($item){
-  echo "<div class='4u 12u(mobile)'>";
+function display_store_item($item, $num){
+  echo "<div class='". (12/$num) . "u 12u(mobile)'>";
     echo "<section class='highlight'>";
       echo "<a href='#' class='image featured'><img src='$item[file_path]' alt=''></a>";
       echo "<h3><a href='#'>$item[name]</a></h3>";

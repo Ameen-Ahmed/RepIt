@@ -19,6 +19,7 @@ if(is_post_request()) {
         $user['id'] = mysqli_insert_id($db);
         log_in_user($user);
         mailer($user['firstname'] . $user['lastname'], $user['email'], 'Confirmation email');
+        $_SESSION['current_user_id'] = $user['id'];
         redirect_to(url_for('index.php'));
 
     }

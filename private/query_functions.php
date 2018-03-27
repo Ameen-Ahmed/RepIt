@@ -237,7 +237,7 @@ function find_all_state_abrr() {
 function get_available_store_items() {
     global $db;
     $sql = "SELECT * FROM siteproducts ";
-    $sql .= "WHERE status='Available' ";
+    $sql .= "WHERE LOWER(status) =LOWER('Available') ";
     //die(mysqli_error($db));
 
     $result = mysqli_query($db, $sql);

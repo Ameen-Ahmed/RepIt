@@ -2,6 +2,10 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+if(isset($_POST['mail_name']) || isset($_POST['mail_email']) || isset($_POST['message'])) {
+  //send mail from here
+  //mailer($_POST['mail_name'], $_POST['mail_email'], $_POST['message']);
+}
 
 function url_for($script_path) {
   // add the leading '/' if not present
@@ -80,8 +84,8 @@ function mailer($name, $email, $message){
         );
 
         //Recipients
-        $mail->setFrom('repitcontactus@gmail.com');
-        $mail->addAddress('repitcontactus@gmail.com');
+        $mail->setFrom('repitcontactus@gmail.com', 'RepIt');
+        $mail->addAddress($email);
         $mail->addReplyTo($email);                            // Add a recipient
 
         //Content

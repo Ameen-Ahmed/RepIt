@@ -2,24 +2,40 @@
 
 
 require_once("client_configuration.php");
+//protected $phone; $email; $firstName; $lastName; $address; $city; $state; $zip; $country;
 
+$buyer = new \Bitpay\Buyer();
+$item = new \Bitpay\Item();
+$invoice = new \Bitpay\Invoice();
 
-
-
-function sendInvoice($orderId, $itemCode, $itemDescription, $itemPrice){
-  global $client;
-  $buyer = new \Bitpay\Buyer();
-  $item = new \Bitpay\Item();
-  $invoice = new \Bitpay\Invoice();
-
-  $buyerEmail = "testbuyer@mail.com";
+function set_buyer_info($fname, $lname, $email, $address1, $city, $state, $zip, $country){
+  global $buyer;
   $buyer
-      ->setEmail($buyerEmail);
+      ->setFirstName($fname)
+      ->setLastName($lname)
+      ->setEmail($email)
+      ->setAddress(array($address1))
+      ->setCity($city)
+      ->setState($state)
+      ->setZip($zip)
+      ->setCountry($country);
+}
 
+function set_item_info($itemCode, $itemDescription, $itemPrice){
+  global $item;
+  $item = new \Bitpay\Item();
   $item
       ->setCode($itemCode)
       ->setDescription($itemDescription)
-      ->setPrice($itemPrice);
+      ->setPrice($itemPrice)
+      ->setPhysical(true);
+}
+
+function sendInvoice($orderId){
+  global $client;
+  global $buyer;
+  global $item;
+  global $invoice;
 
   $invoice
       ->setBuyer($buyer)
@@ -40,9 +56,18 @@ function sendInvoice($orderId, $itemCode, $itemDescription, $itemPrice){
       exit(1); // We do not want to continue if something went wrong
   }
 }
-  //setBuyerInfo();
-  // setItemInfo("test", "test", '99');
-  // setInvoiceInfo($buyer, $item, "0043");
-  // buildInvoice();
-  // echo 'Success! Created invoice "' . $invoice->getId() . '". See ' . $invoice->getUrl() . PHP_EOL;
+
+function getRate(){
+  global $client;
+  $request = new \Bitpay\Client\Request();
+  $request->setHost('test.bitpay.com');
+  $request->setMethod(\Bitpay\Client\Request::METHOD_GET);
+  $request->setPath('rates/USD');
+
+  $response = $client->sendRequest($request);
+  $data = json_decode($response->getBody(), true);
+  return ($data['data']['rate']);
+
+}
+
 ?>

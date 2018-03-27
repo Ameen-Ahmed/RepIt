@@ -6,7 +6,7 @@ $page_title = 'About Us';
 
 <body class="homepage">
     <div id="page-wrapper">
-        <!-- Header -->    
+        <!-- Header -->
         <div id="header-wrapper" class="wrapper">
             <div id="header">
                 <!-- Nav -->
@@ -27,35 +27,53 @@ $page_title = 'About Us';
                         <p class="style2" style="font-size:42;">
                             Meet the Team
                         </p>
-                        
-                        <div>
-                            <p style="float: left;"><img src="images/ameen_circle.gif" height="300px" width="300px" border="1px"></p>
-                            <br>
-                            <h2>Ameen Ahmed</h2>
-                            <h3>Co-Founder and CEO</h3>
-                            <br>
-                            <p>Favorite Color: Red</p>
-                            <p>Favorite Artist: Chris Brown</p>
-                        </div>
-                        <div style="clear: left;">
-                            <p style="float: left;"><img src="images/agyakwa_circle.gif" height="300" width="300" border="1px"></p>
-                            <br>
-                            <h2>Agyakwa Tenkorang</h2>
-                            <h3>Co-Founder and CIO</h3>
-                            <br>
-                            <p>Favorite Color: Green</p>
-                            <p>Favorite Artist: Bruno Mars</p>
-                        </div>
-                        <div style="clear: left;">
-                            <p style="float: left;"><img src="images/dom_circle.gif" height="300" width="300" border="1px"></p>
-                            <br>
-                            <h2>Dominique Huynh</h2>
-                            <h3>COO</h3>
-                            <br>
-                            <p>Favorite Color: Blue</p>
-                            <p>Favorite Artist: Ariana Grande</p>
-                        </div>
-                        
+                        <div class="feature-list">
+                          <div class="row">
+                            <div class="12u 12u(mobile)">
+                              <section>
+                                <div>
+                                    <p style="float: left;"><img src="images/ameen_circle.gif" height="300px" width="300px" border="1px"></p>
+                                    <br>
+                                    <h2><font size=6>Ameen Ahmed</font></h2>
+                                    <p style="font-size:20px"><b>Co-Founder and CEO</b></p>
+                                    <br>
+                                    <p style="font-size:20px">Favorite Color: Red</p>
+                                    <p style="font-size:20px">Favorite Artist: Chris Brown</p>
+                                </div>
+                              </section>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="12u 12u(mobile)">
+                              <section>
+                                <div style="clear: left;">
+                                    <p style="float: left;"><img src="images/agyakwa_circle.gif" height="300" width="300" border="1px"></p>
+                                    <br>
+                                    <h2><font size=6>Agyakwa Tenkorang</font></h2>
+                                    <p style="font-size:20px"><b>Co-Founder and CIO</b></p>
+                                    <br>
+                                    <p style="font-size:20px">Favorite Color: Green</p>
+                                    <p style="font-size:20px">Favorite Artist: Bruno Mars</p>
+                                </div>
+                              </section>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="12u 12u(mobile)">
+                              <section>
+                                <div style="clear: left;">
+                                    <p style="float: left;"><img src="images/dom_circle.gif" height="300" width="300" border="1px"></p>
+                                    <br>
+                                    <h2><font size=6>Dominique Huynh</font></h2>
+                                    <p style="font-size:20px"><b>COO</b></p>
+                                    <br>
+                                    <p style="font-size:20px">Favorite Color: Blue</p>
+                                    <p style="font-size:20px">Favorite Artist: Ariana Grande</p>
+                                </div>
+                              </section>
+                            </div>
+                          </div>
                     </section>
                 </div>
                 <!-- Footer -->

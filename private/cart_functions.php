@@ -1,13 +1,51 @@
 <?php
 include('private/Bitpay/create_invoice.php');
 
-$current_user = '3';
+if(isset($_SESSION['current_user_id'])){
+  $current_user = $_SESSION['current_user_id'];
+}
+else{
+  $current_user = 0;
+}
+$check_status = false;
+$pending_invoice_id = '';
+
+if(is_post_request()) {
+  if(isset($_POST['checkout'])){
+    $invoice_ret = checkout_cart_items();
+    $invoice_id = $invoice_ret->getId();
+    echo "<script> bitpay.setApiUrlPrefix('https://test.bitpay.com');";
+    echo "bitpay.showInvoice('$invoice_id');";
+    echo "</script>";
+    $pending_payment = true;
+    $pending_id = $invoice_id;
+    $ret = find_user_by_id($current_user);
+    $buyername = $ret['first_name'] . " " . $ret['last_name'];
+    $buyeremail = $ret['email'];
+?>
+    <script type="text/javascript">
+        pending("<?php echo $pending_id;?>", "<?php echo $buyername;?>", "<?php echo $buyeremail;?>");
+    </script>
+<?php
+  }
+  else{
+    $s = get_user_carts($current_user);
+    while($row=mysqli_fetch_array($s)){
+      $item = $row['itemId'];
+      if(isset($_POST['cart'.$item])){
+        remove_item($item);
+      }
+    }
+  }
+
+}
 
 
 
-function initialize_cart($owner){
+function initialize_cart(){
   global $current_user;
-  $current_user = $owner;
+  $ret = find_user_by_id($current_user);
+  set_buyer_info($ret['first_name'], $ret['last_name'], $ret['email'], $ret['address'], $ret['city'], $ret['state'], $ret['zipcode'], 'US');
 }
 
 function add_item($item){
@@ -40,6 +78,8 @@ function populate_cart(){
     display_cart_item($row);
     $subtotal += ($row['itemPrice'] * $row['itemQuantity']);
   }
+  $subtotal = number_format($subtotal, 2);
+  $bit_total = number_format($subtotal / getRate(), 6);
   if($subtotal > 0){
     echo "<div class='feature-list'>";
     echo "<div class='row'>";
@@ -47,7 +87,8 @@ function populate_cart(){
           echo "<p></p>";
       echo "</div>";
       echo "<div class='3u 12u(mobile)'>";
-          echo "<font size=5 color='red'><b>Subtotal:</b> $$subtotal</font>";
+          echo "<font size=5 color='red'><b>Subtotal:</b> $$subtotal</font></br>";
+          echo "<font size=5 color='orange'><b>BTC:</b> $bit_total</font>";
       echo "</div>";
     echo "</div>";
     echo "</div>";
@@ -77,10 +118,11 @@ function display_cart_item($item){
               echo "<div class='4u 12u(mobile)'>";
                   echo "<font size=6><b> $item[itemName]</b></font><br/>";
                   echo "<font size=5><b>Seller:</b> $seller_info[username]</font><br/>";
-                  if($item['itemStatus'] === 'Available')
-                    echo "<font size=4 color='green'><b>Status:</b> $item[itemStatus]</font><br/>";
-                  if($item['itemStatus'] === 'Unavailable')
-                    echo "<font size=4 color='red'><b>Status:</b> $item[itemStatus]</font><br/>";
+                  $uppercase_status = ucwords($item['itemStatus']);
+                  if(strcasecmp($item['itemStatus'], 'Available') == 0)
+                    echo "<font size=4 color='green'><b>Status:</b>$uppercase_status</font><br/>";
+                  if(strcasecmp($item['itemStatus'], 'Unavailable') == 0)
+                    echo "<font size=4 color='red'><b>Status:</b>$uppercase_status</font><br/>";
 
               echo "</div>";
 
@@ -114,13 +156,20 @@ function build_invoice(){
     $items .= $row['itemName']. " Qty.". (string)$row['itemQuantity']. " | ";
     $subtotal += ($row['itemPrice'] * $row['itemQuantity']);
   }
-  return array($items, $subtotal);
+  $ret = find_user_by_id($current_user);
+  set_buyer_info($ret['first_name'], $ret['last_name'], $ret['email'], $ret['address'], $ret['city'], $ret['state'], $ret['zipcode'], 'US');
+  set_item_info(1234, $items, $subtotal);
 }
 
 function checkout_cart_items(){
-  $retval = build_invoice();
-  $retId = sendInvoice('order', 1234, $retval[0], $retval[1]);
-  return $retId;
+  if(is_logged_in()){
+    build_invoice();
+    $retId = sendInvoice('order');
+    return $retId;
+  }
+  else{
+    redirect_to("login.php");
+  }
 }
 
 

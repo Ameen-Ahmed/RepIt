@@ -10,25 +10,10 @@ $page_title = 'Shopping Cart';
 
 <body class="homepage">
   <script src="https://bitpay.com/bitpay.js" type="text/javascript"> </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="private/checking.js"></script>
   <?php require_once('private/cart_functions.php');
 
-  if(is_post_request()) {
-    $s = get_user_carts($current_user);
-    while($row=mysqli_fetch_array($s)){
-      $item = $row['itemId'];
-      if(isset($_POST['cart'.$item])){
-        remove_item($item);
-      }
-    }
-    if(isset($_POST['checkout'])){
-      $invoice_ret = checkout_cart_items();
-      $invoice_id = $invoice_ret->getId();
-      echo "<script> bitpay.setApiUrlPrefix('https://test.bitpay.com');";
-      echo "bitpay.showInvoice('$invoice_id');";
-      echo "</script>";
-
-    }
-  }
   ?>
     <div id="page-wrapper">
         <!-- Header -->
@@ -85,5 +70,4 @@ $page_title = 'Shopping Cart';
 <script src="assets/js/util.js"></script>
 <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 <script src="assets/js/main.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </html>
