@@ -1898,7 +1898,7 @@
 				}
 
 			.feature-list p {
-				margin: 0 0 0 5em;
+				margin: 0 0 0 -2em;
 			}
 
 			.feature-list.small h3:before {

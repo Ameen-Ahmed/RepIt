@@ -3,71 +3,17 @@ $page_title = 'Home';
 ?>
 
 <?php include_once('private/shared/header.php');?>
-
+<head>
+  <title>$page_title</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/slide-show.css" />
+  <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+  <script src="assets/js/slide-show.js"></script>
+</head>
 <body class="homepage">
-    <div id="page-wrapper">
-
-            <style>
-            * {box-sizing: border-box;}
-            body {font-family: Source Sans Pro, sans-serif;}
-            .mySlides {display: none;}
-            img {vertical-align: middle;}
-
-            .slideshow-container {
-              max-width: 1500px;
-              height: auto;
-              position: relative;
-              margin: auto;
-              background-size: 100% 100%;
-              top: -350px
-            }
-
-            .text {
-              color: #f2f2f2;
-              font-size: 65px;
-              padding: 8px 12px;
-              position: absolute;
-              width: 100%;
-              text-align: center;
-            }
-
-            .dot {
-              height: 0px;
-              width: 0px;
-              margin: 0 2px;
-              background-color: #bbb;
-              border-radius: 50%;
-              display: inline-block;
-              transition: background-color 0.6s ease;
-            }
-
-            .active {
-              background-color: #717171;
-            }
-
-            .fade {
-              -webkit-animation-name: fade;
-              -webkit-animation-duration: 1.5s;
-              animation-name: fade;
-              animation-duration: 1.5s;
-            }
-
-            @-webkit-keyframes fade {
-              from {opacity: .4}
-              to {opacity: 1}
-            }
-
-            @keyframes fade {
-              from {opacity: .4}
-              to {opacity: 1}
-            }
-
-            @media only screen and (max-width: 300px) {
-              .text {font-size: 11px}
-            }
-        </style>
-
-	<body class="homepage">
 		<div id="page-wrapper">
 
         <!-- Header -->
@@ -97,25 +43,7 @@ $page_title = 'Home';
                           <span class="dot"></span>
                         </div>
                         <script>
-                            var slideIndex = 0;
                             showSlides();
-
-                            function showSlides() {
-                                var i;
-                                var slides = document.getElementsByClassName("mySlides");
-                                var dots = document.getElementsByClassName("dot");
-                                for (i = 0; i < slides.length; i++) {
-                                   slides[i].style.display = "none";
-                                }
-                                slideIndex++;
-                                if (slideIndex > slides.length) {slideIndex = 1}
-                                for (i = 0; i < dots.length; i++) {
-                                    dots[i].className = dots[i].className.replace(" active", "");
-                                }
-                                slides[slideIndex-1].style.display = "block";
-                                dots[slideIndex-1].className += " active";
-                                setTimeout(showSlides, 2000);
-                            }
                         </script>
                 </div>
                 <!-- Nav -->
@@ -185,5 +113,7 @@ $page_title = 'Home';
 <script src="assets/js/util.js"></script>
 <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 <script src="assets/js/main.js"></script>
+
 </body>
 </html>
+>>>>>>> before discard
