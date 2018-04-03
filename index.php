@@ -28,7 +28,7 @@ $page_title = 'Home';
                             </div>
 
                             <div class="mySlides fade">
-                                <img src="images/ArianaGrandeFront.jpg" style="width:100">
+                                <img src="images/ArianaGrandeFront.jpg" style="width:95%">
                             </div>
 
                             <div class="mySlides fade">

@@ -236,7 +236,14 @@ function find_all_state_abrr() {
 
 function get_available_store_items() {
     global $db;
-    $sql = "SELECT * FROM siteproducts ";
+    $sql = "SELECT siteusers.username AS username,
+    siteproducts.description AS itemDescription, siteproducts.status AS itemStatus,
+    siteproducts.price AS itemPrice, siteproducts.name AS itemName,
+    siteproducts.owner_id AS seller,siteproducts.file_path AS itemPath,
+    siteproducts.item_id AS itemId, siteproducts.item_condition AS itemCondition,
+    siteproducts.size AS itemSize
+    FROM siteproducts ";
+    $sql .= "INNER JOIN siteusers ON siteproducts.owner_id = siteusers.id ";
     $sql .= "WHERE LOWER(status) =LOWER('Available') ";
     //die(mysqli_error($db));
 
@@ -251,7 +258,8 @@ function get_user_carts($user_id) {
     siteproducts.description AS itemDescription, siteproducts.status AS itemStatus,
     siteproducts.price AS itemPrice, siteproducts.name AS itemName,
     siteproducts.owner_id AS seller,siteproducts.file_path AS itemPath,
-    siteproducts.item_id AS itemId
+    siteproducts.item_id AS itemId, siteproducts.item_condition AS itemCondition,
+    siteproducts.size AS itemSize 
     FROM usercarts ";
     $sql .= "INNER JOIN siteusers ON usercarts.user_id = siteusers.id ";
     $sql .= "INNER JOIN siteproducts ON usercarts.item_id = siteproducts.item_id ";
