@@ -3,14 +3,7 @@ $page_title = 'About Us';
 ?>
 
 <?php include_once('private/shared/header.php');?>
-<head>
-  <title>$page_title</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-</head>
+
 <body class="homepage">
     <div id="page-wrapper">
         <!-- Header -->
@@ -66,6 +59,7 @@ $page_title = 'About Us';
                               </section>
                             </div>
                           </div>
+                            
                           <div class="row">
                             <div class="12u 12u(mobile)">
                               <section>
@@ -81,6 +75,7 @@ $page_title = 'About Us';
                               </section>
                             </div>
                           </div>
+                        </div>
                     </section>
                 </div>
                 <!-- Footer -->
@@ -97,4 +92,3 @@ $page_title = 'About Us';
 <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 <script src="assets/js/main.js"></script>
 </body>
-</html>

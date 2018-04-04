@@ -17,7 +17,12 @@
         ?>
         <li><a href="contact.php"><font size=4>Contact Us</font></a></li>
     </ul>
-    <?php if (is_logged_in()){
-        echo "Logged In as: " . $_SESSION['username'];}
-    ?>
+    <ul>
+        <?php if (is_logged_in()){
+                echo "<li><a href=membership.php><img src='images/User_Icon2.png' style='vertical-align:middle' height='' width='45'></a></li>";
+                // echo "Logged In as: " . $_SESSION['username'];
+                echo $_SESSION['username'];
+            }
+        ?>
+    </ul>
 </nav>

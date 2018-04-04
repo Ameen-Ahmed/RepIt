@@ -29,7 +29,7 @@ if(is_post_request()) {
                 // password matches
                 log_in_user($user);
                 $_SESSION['current_user_id'] = $user['id'];
-                redirect_to("shopping_cart.php");
+                redirect_to("membership.php");
             } else {
                 // username found, but password does not match
                 $errors[] = $login_failure_msg;
@@ -45,14 +45,6 @@ $page_title = 'Login';
 ?>
 
 <?php include_once('private/shared/header.php');?>
-<head>
-  <title>$page_title</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-</head>
 <body class="homepage">
     <?php echo display_errors($errors); ?>
     <div id="page-wrapper">
@@ -87,9 +79,6 @@ $page_title = 'Login';
                                                     <li><input type="submit" class="style1" value="Login" /></li>
                                                     <li><input type="reset" class="style2" value="Cancel" /></li>
                                                 </ul>
-                                            </div>
-                                            <div class="6u 12u">
-                                                <p>Don't have an account? <a href=signup.php>Sign up</a></p>
                                             </div>
                                         </div>
                                     </form>
