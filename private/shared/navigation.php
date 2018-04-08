@@ -8,10 +8,7 @@
             if(!is_logged_in()){
                 echo "<li><a href=signup.php><font size=4>Sign Up</font></a></li>";
                 echo "<li><a href=login.php><font size=4>Login</font></a></li>";
-            }
-        ?>
-        <?php
-            if(is_logged_in()){
+            }else{
                 echo "<li><a href=logout.php><font size=4>Logout</font></a></li>";
             }
         ?>

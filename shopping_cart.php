@@ -1,8 +1,7 @@
 <?php
 require_once('private/initialize.php');
-
-
 $page_title = 'Shopping Cart';
+require_login();
 ?>
 <?php include_once('private/shared/header.php');
 

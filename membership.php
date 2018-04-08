@@ -1,5 +1,6 @@
 <?php require_once('private/initialize.php');
 $page_title = 'Membership';
+require_login();
 
 $user = find_user_by_id($_SESSION['user_id']);
 ?>
