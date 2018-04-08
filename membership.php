@@ -1,5 +1,7 @@
 <?php require_once('private/initialize.php');
 $page_title = 'Membership';
+
+$user = find_user_by_id($_SESSION['user_id']);
 ?>
 
 <?php include_once('private/shared/header.php');?>
@@ -18,9 +20,9 @@ $page_title = 'Membership';
                         <p class="style2" style="font-size:32;">
                            Your Account
                         </p>
-                        <p class="style3" style="text-align:left;font-size:24;"><strong>Name: </strong> <?php echo $_POST['firstname']?></p>
-                        <p class="style3" style="text-align:left;font-size:24;"><strong>Email: </strong><?php echo $_POST['email']?></p>
-                        <p class="style3" style="text-align:left;font-size:24;"><strong>Address: </strong></p>
+                        <p class="style3" style="text-align:left;font-size:24;"><strong>Name: </strong> <?php echo $user['first_name']?></p>
+                        <p class="style3" style="text-align:left;font-size:24;"><strong>Email: </strong><?php echo $user['email']?></p>
+                        <p class="style3" style="text-align:left;font-size:24;"><strong>Address: </strong><?php echo $user['address']?></p>
                     </section>
                     <section id="intro" class="container">
                         <p class="style2" style="font-size:42;">
