@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2018 at 01:18 AM
+-- Generation Time: Apr 03, 2018 at 07:37 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -31,10 +31,12 @@ SET time_zone = "+00:00";
 CREATE TABLE `siteproducts` (
   `item_id` int(11) NOT NULL,
   `owner_id` int(11) NOT NULL,
-  `description` text,
-  `status` varchar(50) NOT NULL,
-  `price` decimal(10,2) NOT NULL,
   `name` varchar(50) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `size` varchar(12) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `description` text,
+  `item_condition` varchar(30) NOT NULL,
   `file_path` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -42,10 +44,10 @@ CREATE TABLE `siteproducts` (
 -- Dumping data for table `siteproducts`
 --
 
-INSERT INTO `siteproducts` (`item_id`, `owner_id`, `description`, `status`, `price`, `name`, `file_path`) VALUES
-(1, 2, 'Arai', 'Available', '3.99', 'Aria Tshirt', 'images/ArianaGrandeShirt.jpg'),
-(2, 2, 'trav', 'Available', '23.99', 'Trav Tshirt', 'images/travis-scott-jacket.jpg'),
-(3, 3, 'Xo', 'Available', '0.50', 'Xo shirt', 'images/XO-Weeknd-TSHIRT.jpg');
+INSERT INTO `siteproducts` (`item_id`, `owner_id`, `name`, `price`, `size`, `status`, `description`, `item_condition`, `file_path`) VALUES
+(1, 2, 'Aria Tshirt', '3.99', 'Small', 'available', 'So I went to the Ariana Grande concert last month and I got this awesome t-shirt. It was one of the only ones left so I brought it. When I got home and tried it on, it was too small. Other than trying it on, its completely new.', 'Slightly Worn', 'images/ArianaGrandeShirt.jpg'),
+(2, 2, 'Trav Tshirt', '23.99', 'L', 'available', 'Love me some Travie. I picked this up at a concert in Houston, TX.', 'New', 'images/travis-scott-jacket.jpg'),
+(3, 3, 'Xo shirt', '0.50', 'X-Large', 'Available', 'The Weeknd was so amazing live, I ended up buying 2 shirts. I don\'t really need the second one lol.', 'Mint Condition', 'images/XO-Weeknd-TSHIRT.jpg');
 
 -- --------------------------------------------------------
 
@@ -71,10 +73,17 @@ CREATE TABLE `siteusers` (
 --
 
 INSERT INTO `siteusers` (`id`, `first_name`, `last_name`, `email`, `username`, `address`, `state`, `city`, `zipcode`, `password`) VALUES
+(0, 'Guest', 'Test', 'guest@guest.com', 'Guest', '1234 Guest Ln', 'GA', 'Guestwood', '12345', '$2y$10$V23zhJsu.khQj2MPYW2UGeFK42Qa9Ktdebc/0ehYq0ZWi9ZvirdNa'),
 (2, 'Bob', 'T', 'a', 'Bob', '1', 'va', 'd', '3', 's'),
 (3, 'Meg', 'T', 'a', 'Meg', '1', 'va', 'd', '3', 's'),
 (4, 'Kim', 'f', 'f', 'Kim', 'f', 'v', 's', 'd', 'a'),
-(5, 'Cam', 'f', 'f', 'Cam', 'f', 'v', 's', 'd', 'a');
+(5, 'Cam', 'f', 'f', 'Cam', 'f', 'v', 's', 'd', 'a'),
+(6, 'For', 'Adssd', 'kw36@gmail.com', 'qwer', '12345 Money Ln ', 'GA', 'Cash', '12345', '$2y$10$BUXtZaDqePhQpZKhwECfyOOcjWumbrQ.xmDZmRG1QQHWCTNX2JXXW'),
+(7, 'wert', 'wert', 'wert@qwr.com', 'wert', '1234 qwer ln', 'IL', 'qwer', '12345', '$2y$10$6Sd2aZb32pmFesf.X6MRkeUZzX4SmbS/iJ31YSy2eG6SekbjDSFWK'),
+(8, 'Rush', 'Setty', 'rs5yb@virginia.edu', 'Icy', '1485 Drumheller Drive', 'VA', 'Virginia Beach', '23555', '$2y$10$apoA9G/WZdLqC9qSRb7sPenWTJx6/.6dpNUFKhfCvG7gErqLEArNO'),
+(9, 'Rush', 'Setty', 'rs5yb@virginia.edu', 'fes', '1485 Drumheller Drive', 'HI', 'Virginia Beach', '23555', '$2y$10$aS1qiynrMlw74wGRb1mkQu3Bo5couJlao/EbZHs16zk6OI6tjfVxa'),
+(10, 'Rush', 'Setty', 'rs5yb@virginia.edu', 'fe', '1485 Drumheller Drive', 'VA', 'Virginia Beach', '23555', '$2y$10$/BFNXS/FRVKuKe0lTTGET.Gs/VUwa2N3xPkm3tQDuR1KeGy7dB7va'),
+(11, 'Test', 'Buyer', 'testbuyer@mail.com', 'testbuyer', '234 asdf  ln', 'FL', 'sdaf', '12345', '$2y$10$tFxvTuta7iRK8OQL0cjca.koaWfN5usySCwPqmFv/k0Q6.fi2ry3O');
 
 -- --------------------------------------------------------
 
@@ -154,7 +163,7 @@ INSERT INTO `states` (`state_id`, `state_name`, `state_abbr`) VALUES
 CREATE TABLE `usercarts` (
   `user_id` int(11) NOT NULL,
   `item_id` int(11) DEFAULT NULL,
-  `quantity` int(11) NOT NULL DEFAULT '0'
+  `quantity` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -162,12 +171,20 @@ CREATE TABLE `usercarts` (
 --
 
 INSERT INTO `usercarts` (`user_id`, `item_id`, `quantity`) VALUES
-(2, 1, 0),
-(2, 2, 0),
-(2, 3, 0),
-(5, 2, 0),
-(5, 1, 0),
-(3, 2, 1);
+(2, 1, 1),
+(2, 2, 1),
+(2, 3, 1),
+(5, 2, 1),
+(5, 1, 1),
+(3, 2, 1),
+(6, 2, 2),
+(6, 1, 1),
+(6, 3, 1),
+(7, 1, 3),
+(7, 3, 1),
+(11, 2, 1),
+(0, 2, 3),
+(0, 1, 2);
 
 --
 -- Indexes for dumped tables
@@ -200,7 +217,8 @@ ALTER TABLE `states`
 --
 ALTER TABLE `usercarts`
   ADD KEY `user_id` (`user_id`) USING BTREE,
-  ADD KEY `item_id` (`item_id`) USING BTREE;
+  ADD KEY `item_id` (`item_id`) USING BTREE,
+  ADD KEY `quantity` (`quantity`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -216,7 +234,7 @@ ALTER TABLE `siteproducts`
 -- AUTO_INCREMENT for table `siteusers`
 --
 ALTER TABLE `siteusers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `states`

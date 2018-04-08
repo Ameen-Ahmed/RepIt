@@ -80,6 +80,11 @@ $page_title = 'Login';
                                                     <li><input type="reset" class="style2" value="Cancel" /></li>
                                                 </ul>
                                             </div>
+
+                                            <div class="12u">
+                                                <p>Don't have an account? <a href=signup.php>Sign up</a></p>
+                                            </div>
+
                                         </div>
                                     </form>
                                 </section>

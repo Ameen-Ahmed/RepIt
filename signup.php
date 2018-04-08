@@ -70,9 +70,11 @@ $page_title = 'Sign Up';
                 <div id="footer-wrapper" class="wrapper">
                     <div class="title"><font size=5>Sign Up</font></div>
                     <div id="footer" class="container">
-                        <hr />
                         <div class="row 150%">
-                            <div class="10u 12u(mobile)">
+                            <div class="2u 12u(mobile)">
+
+                            </div>
+                            <div class="8u 12u(mobile)">
                                 <!-- Contact Form -->
                                 <section>
                                     <form method="post" action="signup.php">
@@ -92,10 +94,10 @@ $page_title = 'Sign Up';
                                             <div class="12u 12u(mobile)">
                                                 <input type="text" name="address" id="signup-email" placeholder="Address" value="<?php echo h($user['address']); ?>"/>
                                             </div>
-                                            <div class="6u 12u(mobile)">
+                                            <div class="7u 12u(mobile)">
                                                 <input type="text" name="city" id="signup-name" placeholder="City" value="<?php echo h($user['city']); ?>"/>
                                             </div>
-                                            <div class="6u 12u(mobile)">
+                                            <div class="3u 12u(mobile)">
                                                 <select name="state">
                                                     <option value="" disabled selected>Choose State</option>
                                                     <?php
@@ -106,7 +108,7 @@ $page_title = 'Sign Up';
                                                     ?>
                                                 </select>
                                             </div>
-                                            <div class="12u 12u(mobile)">
+                                            <div class="2u 12u(mobile)">
                                                 <input type="text" name="zipcode" id="signup-email" placeholder="Zipcode" value="<?php echo h($user['zipcode']); ?>" />
                                             </div>
                                             <div class="6u 12u(mobile)">
@@ -128,7 +130,6 @@ $page_title = 'Sign Up';
                                 </section>
                             </div>
                         </div>
-                        <hr />
                     </div>
                     <!-- Footer -->
                     <?php require_once('private/shared/footer.php');?>

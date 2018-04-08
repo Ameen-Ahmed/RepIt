@@ -1,10 +1,9 @@
 <?php require_once('private/cart_functions.php');
-    initialize_cart('3');
 
 if(is_post_request()) {
   $results = get_available_store_items();
   while($row=mysqli_fetch_array($results)){
-    $item = $row['item_id'];
+    $item = $row['itemId'];
     if(isset($_POST['item'.$item])){
       add_item($item);
     }
@@ -21,9 +20,10 @@ function populate_store(){
   }
   echo "<form method='post' action='#'>";
     echo "<div class='row 150%'>";
-      while($row=mysqli_fetch_array($results)){
-        display_store_item($row, $num_elements);
-      }
+
+    while($row=mysqli_fetch_array($results)){
+      display_store_item($row, $num_elements);
+    }
     echo "</div>";
   echo "</form>";
 }
@@ -31,13 +31,40 @@ function populate_store(){
 function display_store_item($item, $num){
   echo "<div class='". (12/$num) . "u 12u(mobile)'>";
     echo "<section class='highlight'>";
-      echo "<a href='#' class='image featured'><img src='$item[file_path]' alt=''></a>";
-      echo "<h3><a href='#'>$item[name]</a></h3>";
-      echo "<h5>Price: $$item[price]</h5>";
+    echo "<div id='clickables$item[itemId]'>";
+      echo "<div id='itemClick$item[itemId]' onclick='dynamicEvent($item[itemId])'><a href='javascript:void(0);' class='image featured'><img src='$item[itemPath]' alt='$item[itemName]' title='$item[itemName]'></a></div>";
+      echo "<div id='itemClick$item[itemId]' onclick='dynamicEvent($item[itemId])'><h3 id='myItemName'><a href='javascript:void(0);'>$item[itemName]</a></h3></div>";
+      echo "<h5>Price: $$item[itemPrice]</h5>";
       echo "<br />";
-      echo "<input class='button style1' name='item$item[item_id]' type='submit' value='Add to Cart'></input>";
+      echo "<input class='button style1' name='item$item[itemId]' type='submit' value='Add to Cart'></input>";
+      echo '';
+    echo "</div>";
     echo "</section>";
   echo "</div>";
+  echo"<div id='myModal$item[itemId]' class='modal'>";
+  echo '    <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close" style="color:#e97770">&times;</span>';
+  echo "      <h2 style='color:black'>$item[itemName]</h2>";
+  echo ' </div>
+        <div class="modal-body">
+          <div class="grid-container">';
+
+    echo"        <div class='pic'><img src='$item[itemPath]' style='width:175px'></div>";
+    echo"        <div class='info'>
+                  Seller: <font color='black'>$item[username]</font> </br></br>
+                  Price: <font color='black'>$$item[itemPrice]</font> </br></br> 
+                  Size: <font color='black'>$item[itemSize]</font> </br></br>
+                  Condition: <font color='black'>$item[itemCondition]</font> </div>";
+    echo"        <div class='desc'><p>Details: <font color='black'>$item[itemDescription]</font> </p></div>";
+    echo '     </div>
+        </div>
+        <div class="modal-footer">
+          </br></br>
+        </div>
+      </div>
+    </div>';
 }
 
 ?>
