@@ -1,6 +1,6 @@
 <?php
 
-// Users
+// Users ---------------------------------------------------------------
 
 function find_all_users() {
     global $db;
@@ -223,7 +223,7 @@ function delete_user($id) {
 }
 
 
-// States
+// States ------------------------------------------------------------------------
 
 function find_all_state_abrr() {
     global $db;
@@ -233,6 +233,8 @@ function find_all_state_abrr() {
     confirm_result_set($result);
     return $result;
 }
+
+// Store -------------------------------------------------------------------------
 
 function get_available_store_items() {
     global $db;
@@ -249,8 +251,26 @@ function get_available_store_items() {
 
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
-    return $result; // returns an assoc. array
+    return $result;
 }
+
+function get_items_by_user_id($id, $type){
+    global $db;
+    $sql = "SELECT * FROM siteproducts ";
+    if ($type == "Seller"){
+        $sql.= "WHERE owner_id = '" . $id . "'";
+    }
+    else if($type == "Buyer"){
+        $sql.= "WHERE buyer = '" . $id . "'";
+    }
+
+    $result = mysqli_query($db, $sql);
+    confirm_result_set($result);
+    return $result;
+}
+
+
+// Carts -------------------------------------------------------------------------------
 
 function get_user_carts($user_id) {
     global $db;
