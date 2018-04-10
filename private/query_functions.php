@@ -269,6 +269,39 @@ function get_items_by_user_id($id, $type){
     return $result;
 }
 
+function insert_item($item) {
+    global $db;
+
+//    $errors = validate_item($user);
+//    if(!empty($errors)) {
+//        return $errors;
+//    }
+
+    $sql = "INSERT INTO siteproducts ";
+    $sql.= "(owner_id, name, price, size, status, description, item_condition, file_path) ";
+    $sql.= "VALUES (";
+    $sql.= "'" . db_escape($db, $item['owner_id']) . "', ";
+    $sql.= "'" . db_escape($db, $item['name']) . "', ";
+    $sql.= "'" . db_escape($db, $item['price']) . "', ";
+    $sql.= "'" . db_escape($db, $item['size']) . "', ";
+    $sql.= "'" . db_escape($db, $item['status']) . "', ";
+    $sql.= "'" . db_escape($db, $item['description']) . "', ";
+    $sql.= "'" . db_escape($db, $item['item_condition']) . "', ";
+    $sql.= "'" . db_escape($db, $item['file_path']) . "'";
+    $sql.= ")";
+    $result = mysqli_query($db, $sql);
+
+    // For INSERT statements, $result is true/false
+    if($result) {
+        return true;
+    } else {
+        // INSERT failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+
 
 // Carts -------------------------------------------------------------------------------
 

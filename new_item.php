@@ -1,4 +1,5 @@
 <?php require_once("private/initialize.php");
+require_login();
 
 if(is_post_request()) {
     $errors= [];
@@ -6,24 +7,18 @@ if(is_post_request()) {
     $file_size = $_FILES['image']['size'];
     $file_tmp = $_FILES['image']['tmp_name'];
     $file_type = $_FILES['image']['type'];
-    $file_ext = strtolower(end(explode('.', $_FILES['image']['name'])));
+    $tmp = explode('.', $file_name);
 
-    $extensions= array("jpeg","jpg","png");
-
-    if(in_array($file_ext, $extensions)){
-        $errors[]= "Extension not allowed, please choose a JPEG or PNG file.";
-    }
     if($file_size > 2097152) {
-        $errors[]='File size must be excately 2 MB';
+        $errors[]='File size must be less than 2 MB';
     }
+
     if(empty($errors)) {
         move_uploaded_file($file_tmp, "images/" . $file_name);
-        echo "Success";
-    }else {
-        print_r($errors);
-
     }
-
+    else {
+        print_r($errors);
+    }
     $item = [];
     $item['owner_id'] = $_SESSION['user_id'];
     $item['name'] = $_POST['name'] ?? '';
@@ -32,12 +27,14 @@ if(is_post_request()) {
     $item['status'] = $_POST['status'] ?? '';
     $item['description'] = $_POST['description'] ?? '';
     $item['item_condition'] = $_POST['item_condition'] ?? '';
+    $item['file_path'] = 'images/' . $file_name;
 
     $result = insert_item($item);
 
     if($result === true) {
+        echo "HERE";
         $item['id'] = mysqli_insert_id($db);
-        redirect_to(url_for('member.php'));
+        redirect_to(url_for('membership.php'));
 
     }
     else{
@@ -52,6 +49,7 @@ if(is_post_request()) {
     $item['status'] = '';
     $item['description'] = '';
     $item['item_condition'] = '';
+    $item['file_path'] = '';
 
 }
 
@@ -101,11 +99,10 @@ $page_title = 'Add Item';
                                             <div class="6u 12u(mobile)">
                                                 <input type="text" name="item_condition" id="item_condition" placeholder="Item Condition" value="<?php echo h($item['item_condition']); ?>" />
                                             </div>
-
                                             <div class="12u 12u(mobile)">
                                                 <textarea type="text" name="description" id="description" placeholder=" Item Description" value="<?php echo h($item['description']); ?>" ></textarea>
                                             </div>
-                                            <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
                                             <label>Upload Item Image:</label>
                                             <input type = "file" name = "image" />
                                         </div>
