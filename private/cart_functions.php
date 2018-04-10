@@ -19,7 +19,17 @@ if(is_post_request()) {
   }
 }
 
+if(is_get_request()){
+   if(isset($_GET['checkout'])){
 
+   }
+}
+
+function getRate(){
+  $json = file_get_contents("https://test.bitpay.com/rates/BTC/USD");
+  $data = json_decode($json, true);
+  $GLOBALS["rate"] = $data["data"]["rate"];
+}
 
 function initialize_cart(){
   global $current_user;
@@ -62,6 +72,8 @@ function populate_cart(){
   $subtotal = number_format($subtotal, 2);
   //$bit_total = number_format($subtotal / getRate(), 6);
   if($subtotal > 0){
+    getRate();
+    $btc_total = number_format(($subtotal / $GLOBALS['rate']),6);
     echo "<div class='feature-list'>";
     echo "<div class='row'>";
       echo "<div class='7u 12u(mobile)'>";
@@ -69,7 +81,7 @@ function populate_cart(){
       echo "</div>";
       echo "<div class='3u 12u(mobile)'>";
           echo "<font size=5 color='red'><b>Subtotal:</b> $$subtotal</font></br>";
-          // echo "<font size=5 color='orange'><b>BTC:</b> $bit_total</font>";
+          echo "<font size=5 color='orange'><b>BTC:</b> $btc_total</font>";
       echo "</div>";
     echo "</div>";
     echo "</div>";
@@ -81,10 +93,10 @@ function populate_cart(){
       $ret = find_user_by_id($current_user);
       $bname = $ret['first_name'] . ' ' . $ret['last_name'];
       echo'  <form action="https://test.bitpay.com/checkout" method="post" >
-      <input type="hidden" name="action" value="checkout" />
-      <input type="hidden" name="posData" value="" />';
-      echo "<input type='hidden' name='posData' value='' />";
-      echo "<input type='hidden' name='redirectURL' value='http://localhost/RepIt/shopping_cart.php'/>";
+      <input type="hidden" name="action" value="checkout" />';
+      echo "<input type='hidden' name='posData' value=' { 'ref' : '711454', 'affiliate' : 'spring112' } ' />";
+      echo "<input type='hidden' name='notificationEmail' value='$ret[email]' />";
+      echo "<input type='hidden' name='redirectURL' value='http://localhost/RepIt/shopping_cart.php?checkout=true'/>";
       echo "<input type='hidden' name='price' value='$subtotal' />";
       echo "<input type='hidden' name='orderID' value='order' />";
       echo "<input type='hidden' name='itemDesc' value='$items' />";
@@ -97,7 +109,7 @@ function populate_cart(){
       echo "<input type='hidden' name='buyerZip' value='$ret[zipcode]' />";
       echo "<input type='hidden' name='buyerCountry' value='US' />";
       echo '<input type="hidden" name="data" value="gMCfANQ3fR9Dp9/AcXVGU3rz0jk6v2r/59x1KJbd/poF14Jf10BGtgg3jZm2gTl33gU6i6MJqLV7Io20KXBuCRE1TBYYfx/cTOub4I7Ilfk=" />
-      <input class="button style3" name="checkout" type="submit" value="Check Out" alt="BitPay, the easy way to pay with bitcoins." >
+      <input class="button style3" name="myCheckout" type="submit" value="Check Out" alt="BitPay, the easy way to pay with bitcoins." >
       </form>';
     }
     else{
@@ -111,7 +123,6 @@ function populate_cart(){
   }
 
 }
-
 
 function display_cart_item($item){
   $seller_info = find_user_by_id($item['seller']);
