@@ -254,15 +254,10 @@ function get_available_store_items() {
     return $result;
 }
 
-function get_items_by_user_id($id, $type){
+function get_items_by_user_id($id){
     global $db;
     $sql = "SELECT * FROM siteproducts ";
-    if ($type == "Seller"){
-        $sql.= "WHERE owner_id = '" . $id . "'";
-    }
-    else if($type == "Buyer"){
-        $sql.= "WHERE buyer = '" . $id . "'";
-    }
+    $sql.= "WHERE owner_id = '" . $id . "'";
 
     $result = mysqli_query($db, $sql);
     confirm_result_set($result);
