@@ -77,7 +77,7 @@ $user = find_user_by_id($_SESSION['user_id']);
                                     <div class="12u">
                                         <ul class="actions">
                                             <li><input type="submit" class="style3" value="Update" /></li>
-                                            <li><input type="reset" class="style4" value="Cancel" /></li>
+                                            <li><a href="update_account.php"><button>Cancel</button></a></li>
                                         </ul>
                                     </div>
                                 </div>
