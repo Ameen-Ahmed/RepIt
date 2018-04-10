@@ -22,7 +22,13 @@ $user = find_user_by_id($_SESSION['user_id']);
                             <h2>Your Account</h2>
                         </header>
                         <p class="style1" >
-                            <strong>Name: </strong> <?php echo $user['first_name']?>
+                            <strong>First Name: </strong> <?php echo $user['first_name']?>
+                        </p>
+                        <p class="style1" >
+                            <strong>Last Name: </strong> <?php echo $user['last_name']?>
+                        </p>
+                        <p class="style1" >
+                            <strong>Username: </strong> <?php echo $user['username']?>
                         </p>
                         <p class="style1">
                             <strong>Email: </strong><?php echo $user['email']?>
@@ -30,6 +36,7 @@ $user = find_user_by_id($_SESSION['user_id']);
                         <p class="style1">
                             <strong>Address: </strong><?php echo $user['address']?>
                         </p>
+                        <a href=update_account.php><input type="submit" class="style4" value="Edit" /></a>
                     </section>
                     <section id="intro" class="container">
                         <header class="style2">

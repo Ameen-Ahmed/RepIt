@@ -203,6 +203,32 @@ function update_user($user) {
 
 }
 
+function update_account_settings($user) {
+    global $db;
+
+    $sql = "UPDATE siteusers SET ";
+    $sql .= "first_name='" . db_escape($db, $user['first_name']) . "', ";
+    $sql .= "last_name='" . db_escape($db, $user['last_name']) . "', ";
+    $sql .= "email='" . db_escape($db, $user['email']) . "', ";
+    $sql .= "address='" . db_escape($db, $user['address']) . "', ";
+    $sql .= "city='" . db_escape($db, $user['city']) . "', ";
+    $sql .= "zipcode='" . db_escape($db, $user['zipcode']) . "' ";
+    $sql .= "WHERE id='" . db_escape($db, $user['user_id']) . "' ";
+    $sql .= "LIMIT 1";
+
+    $result = mysqli_query($db, $sql);
+    // For UPDATE statements, $result is true/false
+    if($result) {
+        return true;
+    } else {
+        // UPDATE failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+
+}
+
 function delete_user($id) {
     global $db;
 
