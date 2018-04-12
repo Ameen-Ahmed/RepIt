@@ -336,7 +336,7 @@ function get_user_carts($user_id) {
     siteproducts.price AS itemPrice, siteproducts.name AS itemName,
     siteproducts.owner_id AS seller,siteproducts.file_path AS itemPath,
     siteproducts.item_id AS itemId, siteproducts.item_condition AS itemCondition,
-    siteproducts.size AS itemSize 
+    siteproducts.size AS itemSize
     FROM usercarts ";
     $sql .= "INNER JOIN siteusers ON usercarts.user_id = siteusers.id ";
     $sql .= "INNER JOIN siteproducts ON usercarts.item_id = siteproducts.item_id ";
@@ -420,4 +420,61 @@ function item_in_cart($user_id, $item_id){
   else {
       return false;
   }
+}
+
+function get_time(){
+  global $db;
+  $sql = "SELECT NOW() + 0";
+  $result = mysqli_query($db, $sql);
+  // For UPDATE statements, $result is true/false
+  confirm_result_set($result);
+  return $result; // returns an assoc. array
+}
+
+
+function insert_order($order_id, $user, $price) {
+    global $db;
+
+    $sql = "INSERT INTO siteorders ";
+    $sql.= "(id, customer_id, price, status) ";
+    $sql.= "VALUES (";
+    $sql.= "'" . db_escape($db, $order_id) . "', ";
+    $sql.= "'" . db_escape($db, $user) . "', ";
+    $sql.= "'" . db_escape($db, $price) . "', ";
+    $sql.= "'Paid' ";
+    $sql.= ")";
+    $result = mysqli_query($db, $sql);
+
+    // For INSERT statements, $result is true/false
+    if($result) {
+        return true;
+    } else {
+        // INSERT failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
+}
+
+function insert_order_item($order_id, $item_id, $quantity) {
+    global $db;
+
+    $sql = "INSERT INTO siteorderitems ";
+    $sql.= "(order_id, item_id, quantity) ";
+    $sql.= "VALUES (";
+    $sql.= "'" . db_escape($db, $order_id) . "', ";
+    $sql.= "'" . db_escape($db, $item_id) . "', ";
+    $sql.= "'" . db_escape($db, $quantity) . "' ";
+    $sql.= ")";
+    $result = mysqli_query($db, $sql);
+
+    // For INSERT statements, $result is true/false
+    if($result) {
+        return true;
+    } else {
+        // INSERT failed
+        echo mysqli_error($db);
+        db_disconnect($db);
+        exit;
+    }
 }
