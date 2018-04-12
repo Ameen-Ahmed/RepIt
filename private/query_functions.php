@@ -119,12 +119,15 @@ function validate_user($user) {
     if(is_blank($user['zipcode'])) {
         $errors[] = "Zipcode cannot be left blank.";
     }
-    elseif(!has_length($user['zipcode'], ['exactly' => 5])) {
-        $errors[] = "Zipcode must be exactly 5 characters.";
+    else{
+        if(!has_length($user['zipcode'], ['min' => 5, 'max' => 5])) {
+            $errors[] = "Zipcode must be exactly 5 characters.";
+        }
+        elseif(!has_only_numbers($user['zipcode'])){
+            $errors[] = "Zipcodes may only have numbers.";
+        }
     }
-    if(!has_only_numbers($user['zipcode'])){
-        $errors[] = "Zipcodes may only have numbers.";
-    }
+
 
 
     // Password
