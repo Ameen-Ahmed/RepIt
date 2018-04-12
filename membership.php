@@ -38,13 +38,14 @@ $user = find_user_by_id($_SESSION['user_id']);
                         </p>
                         <a href=update_account.php><input type="submit" class="style4" value="Edit" /></a>
                     </section>
+<!--
                     <section id="intro" class="container">
                         <header class="style2">
                             <h2>Past Orders</h2>
                         </header>
                          <div class='feature-list'>
                             <?php
-                            $items = get_items_by_user_id($user['id'], 'Buyer');
+                            $items = get_items_by_user_id($user['id']);
                             while($item = mysqli_fetch_assoc($items)){
                                 echo "<div class='feature-list'>";
                                 echo "<div class='row'>";
@@ -72,13 +73,14 @@ $user = find_user_by_id($_SESSION['user_id']);
                         ?>
                         </div>
                     </section>
+-->
                     <section id="intro" class="container">
                         <header class="style2">
                             <h2>Your Items For Sale</h2>
                         </header>
                         <div class='feature-list'>
                             <?php
-                                $items = get_items_by_user_id($user['id'], 'Seller');
+                                $items = get_items_by_user_id($user['id']);
                                 while($item = mysqli_fetch_assoc($items)){
                                     echo "<div class='feature-list'>";
                                     echo "<div class='row'>";
@@ -91,13 +93,8 @@ $user = find_user_by_id($_SESSION['user_id']);
                                     echo "</div>";
                                         echo "<div class='3u 12u(mobile)'>";
                                             echo "<form method='post' action='#'>";
-                                                echo "<input class='button style1' name='cart" . $item['item_id'] .  "type='submit' style='background:#787da7'
-                                                value='Cancel Sale'></input>";
+                                                echo "<form action=# method=post><input class='button style4' name='" . $item['item_id'] . "' type='submit' value='Remove Item'></input></form>";
                                                 echo "<br/>";
-                                                echo "<br/>";
-                                                echo "<input class='button style1' name='cart" . $item['item_id'] .  "type='submit' style='background:#787da7'
-                                                value='Edit Price'></input>";
-
                                             echo "</form>";
                                         echo "</div>";
                                     echo "</div>";
@@ -113,6 +110,9 @@ $user = find_user_by_id($_SESSION['user_id']);
                         </div>
                         </p>
                     </section>
+                <div style="text-align:center;">
+                    <a href=new_item.php><input type="submit" class="style4" value="Add Item" /></a>
+                </section>
             </div>
             <!-- Footer -->
             <?php require_once('private/shared/footer.php');?>

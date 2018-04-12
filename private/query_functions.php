@@ -326,6 +326,13 @@ function insert_item($item) {
     }
 }
 
+function delete_item_by_id($id){
+    global $db;
+    $sql = "DELETE FROM siteproducts";
+    $SQL.= "WHERE item_id = '" . $id . "'";
+
+
+}
 
 // Carts -------------------------------------------------------------------------------
 
